@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabaseClient';
 import { AuthContext } from '../context/AuthContext';
 
@@ -294,6 +295,36 @@ const styles = `
 ═══════════════════════════════════════════════ */
 const MAD_CURRENCY = { code: 'MAD', symbol: 'DH', name: 'Dirham marocain', flag: '🇲🇦' };
 
+const KAMAL_WHATSAPP = '+212668867699';
+const PLAN_ORDER = ['essentiel', 'croissance', 'elite'];
+const PLANS = {
+  essentiel: {
+    label: "L'Essentiel",
+    tagline: 'Démarrez proprement',
+    fullPrice: 299,
+    launchPrice: 199,
+    color: '#6b7280',
+    features: ['Tableau de bord', 'Gestion des plats', 'Stock', 'Paramètres'],
+  },
+  croissance: {
+    label: 'Le Plan Croissance',
+    tagline: 'Gérez comme un pro',
+    fullPrice: 499,
+    launchPrice: 399,
+    color: '#f59e0b',
+    popular: true,
+    features: ['Tout Essentiel +', 'Événements', 'Devis', 'Paiements', 'Calculateur', 'Liste de courses', 'Personnel'],
+  },
+  elite: {
+    label: 'Le Plan Élite',
+    tagline: 'Pilotez votre business',
+    fullPrice: 699,
+    launchPrice: 599,
+    color: '#8b5cf6',
+    features: ['Tout Croissance +', 'Comptabilité', 'Factures', 'Rapports', 'Portail client public'],
+  },
+};
+
 const S = {
   label: { fontSize: 12, fontWeight: 700, color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.5px', display: 'block', marginBottom: 6 },
   input: { width: '100%', padding: '10px 14px', border: '1.5px solid #e5e7eb', borderRadius: 10, fontSize: 14, color: '#1a1d2e', background: '#fff', outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' },
@@ -328,6 +359,7 @@ const channelIcon  = (v) => CHANNELS.find(c => c.value === v)?.icon || '📨';
 ═══════════════════════════════════════════════ */
 export default function Settings() {
   const { profile } = useContext(AuthContext);
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('business');
   const [saving, setSaving]       = useState(false);
   const [saved, setSaved]         = useState(false);
@@ -425,6 +457,10 @@ export default function Settings() {
   const [restoreForm, setRestoreForm]     = useState({ target_datetime: '', confirmed: false });
   const [restoreSaving, setRestoreSaving] = useState(false);
   const [restoreSuccess, setRestoreSuccess] = useState(false);
+
+  /* ── Plan Upgrade ── */
+  const [upgradeModal, setUpgradeModal]   = useState({ open: false, plan: null });
+  const [upgradeLoading, setUpgradeLoading] = useState(false);
 
   useEffect(() => {
     if (!profile?.id) return;
@@ -590,6 +626,24 @@ export default function Settings() {
     setTimeout(() => setSaved(false), 2500);
   }
 
+  /* ─── PLAN UPGRADE ─── */
+  async function handleUpgrade() {
+    setUpgradeLoading(true);
+    const newPlan = upgradeModal.plan;
+    await supabase
+      .from('subscriptions')
+      .update({ plan_id: newPlan })
+      .eq('business_id', profile.business_id);
+    const msg = encodeURIComponent(
+      `Mise à niveau demandée: ${profile.business_id} vers le plan ${newPlan} - ${profile.name}`
+    );
+    window.open(`https://wa.me/${KAMAL_WHATSAPP.replace(/\D/g, '')}?text=${msg}`, '_blank');
+    localStorage.removeItem('tp_profile');
+    setUpgradeLoading(false);
+    setUpgradeModal({ open: false, plan: null });
+    navigate('/login');
+  }
+
   /* ═══ RENDER ═══ */
   return (
     <>
@@ -616,6 +670,7 @@ export default function Settings() {
             { key: 'reminders', icon: '🔔', label: 'Rappels' },
             { key: 'whatsapp',  icon: '💬', label: 'WhatsApp' },
             { key: 'securite',  icon: '🔒', label: 'Sécurité' },
+            { key: 'plan',      icon: '⭐', label: 'Plan & Facturation' },
             ...(profile?.email === 'kamal@moorish-automation.com'
               ? [{ key: 'nouveau-client', icon: '➕', label: 'Nouveau client' }]
               : []),
@@ -1158,7 +1213,108 @@ export default function Settings() {
         )}
 
         {/* ══════════════════════════════════
-            TAB 5 — NOUVEAU CLIENT (demo only)
+            TAB 5 — PLAN & FACTURATION
+        ══════════════════════════════════ */}
+        {activeTab === 'plan' && (() => {
+          const currentPlan = profile?.plan_id || 'essentiel';
+          const currentPlanData = PLANS[currentPlan] || PLANS.essentiel;
+          const currentIdx = PLAN_ORDER.indexOf(currentPlan);
+          const upgradePlans = PLAN_ORDER.slice(currentIdx + 1);
+          return (
+            <>
+              {/* Current Plan Card */}
+              <div style={{ background: '#fff', border: '2px solid #10b981', borderRadius: 14, padding: 24, marginBottom: 24, boxShadow: '0 1px 4px rgba(0,0,0,0.06)' }}>
+                <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16 }}>
+                  <div>
+                    <div style={{ fontSize: 11, fontWeight: 700, color: '#10b981', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 6 }}>
+                      ✅ Votre plan actuel
+                    </div>
+                    <div style={{ fontSize: 22, fontWeight: 700, color: '#1a1d2e', marginBottom: 4 }}>
+                      {currentPlanData.label}
+                    </div>
+                    <div style={{ fontSize: 13, color: '#6b7280' }}>{currentPlanData.tagline}</div>
+                  </div>
+                  <div style={{ textAlign: 'right' }}>
+                    <span style={{ background: '#fff7ed', color: '#c2410c', border: '1px solid #fed7aa', borderRadius: 20, padding: '4px 14px', fontSize: 11, fontWeight: 700 }}>
+                      🔥 OFFRE DE LANCEMENT -100 MAD
+                    </span>
+                    <div style={{ fontSize: 30, fontWeight: 800, color: '#10b981', marginTop: 10 }}>
+                      {currentPlanData.launchPrice} MAD
+                      <span style={{ fontSize: 13, fontWeight: 400, color: '#6b7280' }}>/mois</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Upgrade Options */}
+              {upgradePlans.length === 0 ? (
+                <div style={{ textAlign: 'center', padding: '48px 24px', background: '#f0fdf4', borderRadius: 14, border: '1.5px solid #86efac' }}>
+                  <div style={{ fontSize: 44, marginBottom: 14 }}>🎉</div>
+                  <div style={{ fontSize: 17, fontWeight: 700, color: '#065f46', marginBottom: 6 }}>
+                    Vous êtes sur le plan le plus complet 🎉
+                  </div>
+                  <div style={{ fontSize: 13, color: '#047857' }}>
+                    Profitez de toutes les fonctionnalités Traiteur Pro !
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <div style={{ fontSize: 14, fontWeight: 700, color: '#1a1d2e', marginBottom: 16 }}>
+                    ⬆️ Mettre à niveau votre plan
+                  </div>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16 }}>
+                    {upgradePlans.map(planKey => {
+                      const plan = PLANS[planKey];
+                      return (
+                        <div key={planKey} style={{ background: '#fff', border: `2px solid ${plan.color}`, borderRadius: 14, padding: 24, position: 'relative', boxShadow: '0 1px 4px rgba(0,0,0,0.06)' }}>
+                          {plan.popular && (
+                            <div style={{ position: 'absolute', top: -13, left: '50%', transform: 'translateX(-50%)', background: plan.color, color: '#fff', borderRadius: 20, padding: '4px 16px', fontSize: 11, fontWeight: 700, whiteSpace: 'nowrap' }}>
+                              ⭐ Plus populaire
+                            </div>
+                          )}
+                          <div style={{ fontSize: 11, fontWeight: 700, color: plan.color, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>
+                            {plan.tagline}
+                          </div>
+                          <div style={{ fontSize: 18, fontWeight: 700, color: '#1a1d2e', marginBottom: 14 }}>
+                            {plan.label}
+                          </div>
+                          <ul style={{ listStyle: 'none', margin: '0 0 20px', padding: 0 }}>
+                            {plan.features.map(f => (
+                              <li key={f} style={{ fontSize: 13, color: '#374151', padding: '4px 0', display: 'flex', alignItems: 'center', gap: 8 }}>
+                                <span style={{ color: plan.color, fontWeight: 700 }}>✓</span> {f}
+                              </li>
+                            ))}
+                          </ul>
+                          <div style={{ marginBottom: 16 }}>
+                            <span style={{ fontSize: 13, color: '#9ca3af', textDecoration: 'line-through', marginRight: 8 }}>
+                              {plan.fullPrice} MAD/mois
+                            </span>
+                            <span style={{ background: '#fff7ed', color: '#c2410c', border: '1px solid #fed7aa', borderRadius: 20, padding: '2px 10px', fontSize: 11, fontWeight: 700 }}>
+                              LANCEMENT
+                            </span>
+                            <div style={{ fontSize: 28, fontWeight: 800, color: plan.color, marginTop: 6 }}>
+                              {plan.launchPrice} MAD
+                              <span style={{ fontSize: 13, fontWeight: 400, color: '#6b7280' }}>/mois</span>
+                            </div>
+                          </div>
+                          <button
+                            onClick={() => setUpgradeModal({ open: true, plan: planKey })}
+                            style={{ background: plan.color, color: '#fff', border: 'none', borderRadius: 8, padding: '12px 20px', fontSize: 14, fontWeight: 600, cursor: 'pointer', width: '100%' }}
+                          >
+                            Mettre à niveau →
+                          </button>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </>
+              )}
+            </>
+          );
+        })()}
+
+        {/* ══════════════════════════════════
+            TAB 6 — NOUVEAU CLIENT (demo only)
         ══════════════════════════════════ */}
         {activeTab === 'nouveau-client' && profile?.email === 'kamal@moorish-automation.com' && (
           <>
@@ -1270,6 +1426,52 @@ export default function Settings() {
         )}
 
       </div>
+
+      {/* ── UPGRADE MODAL ── */}
+      {upgradeModal.open && (() => {
+        const plan = PLANS[upgradeModal.plan];
+        return (
+          <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.45)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16 }}
+            onClick={() => !upgradeLoading && setUpgradeModal({ open: false, plan: null })}>
+            <div style={{ background: '#fff', borderRadius: 16, padding: 28, width: '100%', maxWidth: 480, boxShadow: '0 20px 60px rgba(0,0,0,0.15)' }}
+              onClick={e => e.stopPropagation()}>
+              <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1a1d2e', margin: '0 0 4px' }}>
+                Passer au {plan?.label} ?
+              </h2>
+              <div style={{ fontSize: 26, fontWeight: 800, color: plan?.color, margin: '10px 0 14px' }}>
+                {plan?.launchPrice} MAD<span style={{ fontSize: 13, fontWeight: 400, color: '#6b7280' }}>/mois</span>
+              </div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: '#374151', marginBottom: 8 }}>
+                Fonctionnalités débloquées :
+              </div>
+              <ul style={{ listStyle: 'none', margin: '0 0 18px', padding: 0 }}>
+                {plan?.features.map(f => (
+                  <li key={f} style={{ fontSize: 13, color: '#374151', padding: '3px 0', display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <span style={{ color: plan.color, fontWeight: 700 }}>✓</span> {f}
+                  </li>
+                ))}
+              </ul>
+              <div style={{ background: '#fef2f2', border: '1.5px solid #fecaca', borderRadius: 10, padding: '12px 16px', fontSize: 13, color: '#dc2626', marginBottom: 22, lineHeight: 1.6 }}>
+                ⚠️ Votre compte sera déconnecté après confirmation pour activer le nouveau plan.
+              </div>
+              <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end' }}>
+                <button
+                  onClick={() => setUpgradeModal({ open: false, plan: null })}
+                  disabled={upgradeLoading}
+                  style={{ background: '#f3f4f6', color: '#374151', border: 'none', borderRadius: 8, padding: '10px 20px', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>
+                  Annuler
+                </button>
+                <button
+                  onClick={handleUpgrade}
+                  disabled={upgradeLoading}
+                  style={{ background: '#10b981', color: '#fff', border: 'none', borderRadius: 8, padding: '10px 22px', fontSize: 13, fontWeight: 600, cursor: upgradeLoading ? 'not-allowed' : 'pointer', opacity: upgradeLoading ? 0.75 : 1, display: 'flex', alignItems: 'center', gap: 8 }}>
+                  {upgradeLoading ? '⏳ En cours…' : '✅ Confirmer la mise à niveau'}
+                </button>
+              </div>
+            </div>
+          </div>
+        );
+      })()}
 
       {/* ── RESTORE MODAL ── */}
       {showRestoreModal && (
