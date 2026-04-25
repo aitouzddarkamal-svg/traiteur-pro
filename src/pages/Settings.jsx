@@ -1235,13 +1235,19 @@ export default function Settings() {
                     <div style={{ fontSize: 13, color: '#6b7280' }}>{currentPlanData.tagline}</div>
                   </div>
                   <div style={{ textAlign: 'right' }}>
-                    <span style={{ background: '#fff7ed', color: '#c2410c', border: '1px solid #fed7aa', borderRadius: 20, padding: '4px 14px', fontSize: 11, fontWeight: 700 }}>
-                      🔥 OFFRE DE LANCEMENT -100 MAD
-                    </span>
-                    <div style={{ fontSize: 30, fontWeight: 800, color: '#10b981', marginTop: 10 }}>
+                    <div style={{ fontSize: 13, color: '#9ca3af', textDecoration: 'line-through', marginBottom: 4 }}>
+                      {currentPlanData.fullPrice} MAD/mois
+                    </div>
+                    <div style={{ fontSize: 22, fontWeight: 700, color: '#16a34a' }}>
                       {currentPlanData.launchPrice} MAD
                       <span style={{ fontSize: 13, fontWeight: 400, color: '#6b7280' }}>/mois</span>
                     </div>
+                    <div style={{ fontSize: 11, color: '#ea580c', fontWeight: 600, marginTop: 4 }}>
+                      Prix de lancement · Offre limitée
+                    </div>
+                    <span style={{ display: 'inline-block', marginTop: 8, background: '#fff7ed', color: '#ea580c', border: '1px solid #fed7aa', borderRadius: 20, padding: '2px 10px', fontSize: 11, fontWeight: 700 }}>
+                      🏷️ Offre de lancement -100 MAD
+                    </span>
                   </div>
                 </div>
               </div>
@@ -1289,13 +1295,13 @@ export default function Settings() {
                             <span style={{ fontSize: 13, color: '#9ca3af', textDecoration: 'line-through', marginRight: 8 }}>
                               {plan.fullPrice} MAD/mois
                             </span>
-                            <span style={{ background: '#fff7ed', color: '#c2410c', border: '1px solid #fed7aa', borderRadius: 20, padding: '2px 10px', fontSize: 11, fontWeight: 700 }}>
-                              LANCEMENT
-                            </span>
-                            <div style={{ fontSize: 28, fontWeight: 800, color: plan.color, marginTop: 6 }}>
+                            <div style={{ fontSize: 22, fontWeight: 700, color: '#16a34a', margin: '6px 0 4px' }}>
                               {plan.launchPrice} MAD
                               <span style={{ fontSize: 13, fontWeight: 400, color: '#6b7280' }}>/mois</span>
                             </div>
+                            <span style={{ background: '#fff7ed', color: '#ea580c', border: '1px solid #fed7aa', borderRadius: 20, padding: '2px 10px', fontSize: 11, fontWeight: 700 }}>
+                              🏷️ Offre de lancement -100 MAD
+                            </span>
                           </div>
                           <button
                             onClick={() => setUpgradeModal({ open: true, plan: planKey })}
