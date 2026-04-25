@@ -310,7 +310,7 @@ export default function Facture() {
       .from('evenements')
       .select('id, nom, date_evenement')
       .eq('business_id', profile.business_id)
-      .order('date_evenement', { ascending: false })
+      .order('nom', { ascending: true })
       .then(({ data }) => setEvenements(data || []));
   }, [profile?.business_id]);
 
