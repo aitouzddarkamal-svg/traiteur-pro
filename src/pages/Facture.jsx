@@ -307,10 +307,10 @@ export default function Facture() {
   useEffect(() => {
     if (!profile?.business_id) return;
     supabase
-      .from('evenements')
-      .select('id, nom, date_evenement')
+      .from('events')
+      .select('id, title, event_date')
       .eq('business_id', profile.business_id)
-      .order('nom', { ascending: true })
+      .order('event_date', { ascending: false })
       .then(({ data }) => setEvenements(data || []));
   }, [profile?.business_id]);
 
@@ -344,7 +344,7 @@ export default function Facture() {
   function handleEventSelect(eventId) {
     const ev = evenements.find(e => e.id === eventId);
     if (ev) {
-      setForm(f => ({ ...f, event_id: eventId, client_name: ev.nom || '' }));
+      setForm(f => ({ ...f, event_id: eventId, client_name: ev.title || '' }));
     } else {
       setForm(f => ({ ...f, event_id: '' }));
     }
@@ -645,7 +645,7 @@ export default function Facture() {
                       <label>Lier à un événement</label>
                       <select value={form.event_id} onChange={e => handleEventSelect(e.target.value)}>
                         <option value="">— Aucun —</option>
-                        {evenements.map(e => <option key={e.id} value={e.id}>{e.nom} — {e.date_evenement}</option>)}
+                        {evenements.map(e => <option key={e.id} value={e.id}>{e.title} — {e.event_date}</option>)}
                       </select>
                     </div>
                     <div className="form-field">
