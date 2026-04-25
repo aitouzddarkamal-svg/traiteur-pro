@@ -184,6 +184,14 @@ UPDATE business_profiles SET ice = '...' WHERE slug = 'monassabat-chrif';
 
 ---
 
+## Git Workflow
+- Always work on main branch
+- After every feature: git add -A && git commit -m "description" && git push origin main
+- Netlify auto-deploys from main in ~11 seconds
+- Never use dev branch
+
+---
+
 ## WHAT NOT TO DO
 - NO TypeScript (.tsx files)
 - NO Tailwind classes
