@@ -1,0 +1,167 @@
+/* ═══════════════════════════════════════════════════════════════
+   Traiteur Pro — RTL Arabic Support
+   Add this to your src/index.css or import in main.jsx
+   File: src/rtl.css
+═══════════════════════════════════════════════════════════════ */
+
+/* ── Base RTL overrides ── */
+[dir="rtl"] {
+  text-align: right;
+}
+
+/* ── Sidebar RTL ── */
+[dir="rtl"] .aside-sidebar {
+  left: auto;
+  right: 0;
+}
+
+[dir="rtl"] .main-content {
+  margin-left: 0;
+  margin-right: 220px;
+}
+
+/* ── Nav items ── */
+[dir="rtl"] .nav-item {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .nav-item .nav-icon {
+  margin-right: 0;
+  margin-left: 10px;
+}
+
+/* ── Border left → right for active nav ── */
+[dir="rtl"] .nav-item.active {
+  border-left: none;
+  border-right: 3px solid #fff;
+}
+
+/* ── Forms ── */
+[dir="rtl"] .form-field label {
+  text-align: right;
+}
+
+/* ── Tables ── */
+[dir="rtl"] table th,
+[dir="rtl"] table td {
+  text-align: right;
+}
+
+/* ── Badges & inline elements ── */
+[dir="rtl"] .badge {
+  direction: rtl;
+}
+
+/* ── KPI cards ── */
+[dir="rtl"] .kpi-card {
+  border-left: none;
+  border-right: 4px solid;
+}
+
+[dir="rtl"] .kpi-card.green  { border-right-color: #10b981; }
+[dir="rtl"] .kpi-card.red    { border-right-color: #ef4444; }
+[dir="rtl"] .kpi-card.blue   { border-right-color: #2563eb; }
+[dir="rtl"] .kpi-card.orange { border-right-color: #f59e0b; }
+[dir="rtl"] .kpi-card.purple { border-right-color: #8b5cf6; }
+[dir="rtl"] .kpi-card.teal   { border-right-color: #0891b2; }
+
+/* ── Panel borders ── */
+[dir="rtl"] .compta-panel,
+[dir="rtl"] .settings-card,
+[dir="rtl"] .panel {
+  border-left: none;
+}
+
+/* ── Mobile drawer ── */
+[dir="rtl"] .mobile-drawer {
+  left: auto;
+  right: 0;
+  transform: translateX(100%);
+}
+
+[dir="rtl"] .mobile-drawer.open {
+  transform: translateX(0);
+}
+
+/* ── Buttons with icons ── */
+[dir="rtl"] .btn {
+  flex-direction: row-reverse;
+}
+
+/* ── Arabic font specific ── */
+[dir="rtl"] * {
+  font-family: 'Cairo', 'Segoe UI', sans-serif;
+  letter-spacing: 0 !important; /* Arabic doesn't use letter-spacing */
+}
+
+/* ── Number formatting — keep LTR for numbers ── */
+[dir="rtl"] .kpi-value,
+[dir="rtl"] .amount,
+[dir="rtl"] td.number,
+[dir="rtl"] .price {
+  direction: ltr;
+  text-align: left;
+}
+
+/* ── Profit bars stay LTR ── */
+[dir="rtl"] .profit-bar-fill,
+[dir="rtl"] .margin-bar-fill,
+[dir="rtl"] .stock-bar-fill {
+  float: right;
+}
+
+/* ── Tabs ── */
+[dir="rtl"] .compta-tabs,
+[dir="rtl"] .settings-tabs,
+[dir="rtl"] .facture-tabs {
+  direction: rtl;
+}
+
+/* ── Invoice preview RTL ── */
+[dir="rtl"] .inv-header {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .inv-number-box {
+  text-align: left;
+}
+
+[dir="rtl"] .inv-parties {
+  direction: rtl;
+}
+
+/* ── Toast notifications ── */
+[dir="rtl"] .success-toast,
+[dir="rtl"] .error-toast {
+  right: auto;
+  left: 24px;
+}
+
+/* ── Scrollbars RTL ── */
+[dir="rtl"] ::-webkit-scrollbar {
+  direction: rtl;
+}
+
+/* ── Page title areas ── */
+[dir="rtl"] .compta-header,
+[dir="rtl"] .settings-header,
+[dir="rtl"] .facture-header,
+[dir="rtl"] .rapport-header {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .panel-head,
+[dir="rtl"] .card-head {
+  flex-direction: row-reverse;
+}
+
+/* ── Filter bars ── */
+[dir="rtl"] .filter-bar,
+[dir="rtl"] .period-bar {
+  flex-direction: row-reverse;
+}
+
+/* ── Month nav ── */
+[dir="rtl"] .mois-nav {
+  flex-direction: row-reverse;
+}

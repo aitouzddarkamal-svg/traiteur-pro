@@ -1,0 +1,162 @@
+/* ── Reset & Base ─────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #f8f7f4;
+  color: #1a1a18;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Scrollbar ────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: #f0efeb; }
+::-webkit-scrollbar-thumb { background: #2d6a4f; border-radius: 4px; }
+
+/* ── Tables — horizontal scroll on mobile ────────────────────────────────── */
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 8px;
+}
+
+/* ── Mobile Global Fixes ─────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+
+  /* All pages: reduce padding on mobile */
+  div[style*="padding: 2rem"] {
+    padding: 1rem !important;
+  }
+  div[style*="padding:'2rem'"] {
+    padding: 1rem !important;
+  }
+
+  /* Tables: force horizontal scroll instead of overflow */
+  table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+    width: 100%;
+    background: #fff;
+    border-radius: 8px;
+  }
+
+  /* Fix two-color split: ensure full width content */
+  main > div {
+    min-width: 0;
+    width: 100%;
+  }
+
+  /* Cards: stack grids on mobile */
+  div[style*="grid-template-columns: 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+  div[style*="grid-template-columns: 1fr 1fr 1fr"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  div[style*="grid-template-columns: 1fr 1fr 1fr 1fr"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* Buttons: full width on mobile forms */
+  button[style*="btnPrimary"] {
+    width: 100%;
+  }
+
+  /* Fix max-width containers */
+  div[style*="maxWidth"] {
+    max-width: 100% !important;
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
+}
+
+/* ── Card Component ───────────────────────────────────────────────────────── */
+.mobile-card {
+  background: #fff;
+  border: 1px solid #e5e4e0;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+/* ── Animations ───────────────────────────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.2s ease forwards;
+}
+
+/* ── Input focus glow ─────────────────────────────────────────────────────── */
+input:focus, select:focus, textarea:focus {
+  border-color: #2d6a4f !important;
+  box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.12);
+  outline: none;
+}
+
+/* ── Button hover effect ─────────────────────────────────────────────────── */
+button {
+  transition: opacity 0.15s, transform 0.1s;
+}
+button:active {
+  transform: scale(0.97);
+}
+
+/* ── Badge ────────────────────────────────────────────────────────────────── */
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ── Modal backdrop ───────────────────────────────────────────────────────── */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+/* ── Mobile bottom padding (avoid content behind bottom nav) ─────────────── */
+@media (max-width: 768px) {
+  main {
+    padding-bottom: 0 !important;
+  }
+}
+
+/* ── Typography scale ─────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  h1 { font-size: 1.25rem !important; }
+}
+
+/* ── Prevent horizontal body scroll ──────────────────────────────────────── */
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* ── Page enter animation ─────────────────────────────────────────────────── */
+.page-enter {
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes pageEnter {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Mobile input / touch targets ─────────────────────────────────────────── */
+input, select, textarea { font-size: 16px !important; }
+button { min-height: 44px; }
