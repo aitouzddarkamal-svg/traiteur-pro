@@ -284,6 +284,7 @@ export default function Facture() {
 
   /* ── Events for linking ── */
   const [eventsList, setEventsList] = useState([]);
+  const [evenements, setEvenements] = useState([]);
 
   /* ── Business settings ── */
   const [biz, setBiz] = useState({ business_name: '', phone: '', email: '', address: '' });
@@ -302,6 +303,16 @@ export default function Facture() {
     loadBizSettings();
     generateInvoiceNumber();
   }, [profile?.id]);
+
+  useEffect(() => {
+    if (!profile?.business_id) return;
+    supabase
+      .from('evenements')
+      .select('id, nom, date_evenement')
+      .eq('business_id', profile.business_id)
+      .order('date_evenement', { ascending: false })
+      .then(({ data }) => setEvenements(data || []));
+  }, [profile?.business_id]);
 
   async function loadBizSettings() {
     const { data } = await supabase.from('users').select('business_settings').eq('id', profile.id).single();
@@ -331,12 +342,9 @@ export default function Facture() {
 
   /* ── Auto-fill from event ── */
   function handleEventSelect(eventId) {
-    const ev = eventsList.find(e => e.id === eventId);
+    const ev = evenements.find(e => e.id === eventId);
     if (ev) {
-      setForm(f => ({ ...f, event_id: eventId, client_name: ev.client_name || '' }));
-      if (ev.total_amount && lineItems.length === 1 && !lineItems[0].description) {
-        setLineItems([{ id: Date.now(), description: `Prestation traiteur — ${ev.client_name}`, quantity: 1, unit_price: ev.total_amount, total: ev.total_amount }]);
-      }
+      setForm(f => ({ ...f, event_id: eventId, client_name: ev.nom || '' }));
     } else {
       setForm(f => ({ ...f, event_id: '' }));
     }
@@ -637,7 +645,7 @@ export default function Facture() {
                       <label>Lier à un événement</label>
                       <select value={form.event_id} onChange={e => handleEventSelect(e.target.value)}>
                         <option value="">— Aucun —</option>
-                        {eventsList.map(ev => <option key={ev.id} value={ev.id}>{ev.client_name} — {fmtDate(ev.event_date)}</option>)}
+                        {evenements.map(e => <option key={e.id} value={e.id}>{e.nom} — {e.date_evenement}</option>)}
                       </select>
                     </div>
                     <div className="form-field">
