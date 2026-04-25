@@ -40,7 +40,7 @@ const GUIDES = {
     steps: [
       "1. Ajoutez chaque ingrédient avec nom français et arabe, catégorie, unité et prix unitaire MAD.",
       "2. Définissez un seuil d'alerte — une icône ⚠ apparaît quand le stock passe en dessous.",
-      "3. Onglet Mouvements : enregistrez chaque entrée (achat) ou sortie (utilisation événement).",
+      "3. Onglet Mouvements : enregistrez chaque mouvement de stock. Entrée = achat fournisseur (ex: 10 kg de viande). Sortie = consommation événement (ex: 3 kg utilisés pour un mariage). Votre stock reste à jour en temps réel.",
       "4. Onglet Fournisseurs : gérez vos contacts avec nom, téléphone et email.",
       "5. Les prix se synchronisent automatiquement avec les coûts de vos recettes de plats.",
       "6. Astuce : mettez à jour les prix chaque semaine depuis le Marché Central pour une marge précise.",
