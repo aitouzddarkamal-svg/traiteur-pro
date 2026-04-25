@@ -138,21 +138,24 @@ const FEATURES = [
 const PLANS = [
   {
     name: "L'Essentiel",
-    price: '199',
+    fullPrice: 299,
+    launchPrice: 199,
     badge: null,
     highlight: false,
     features: ['Plats & recettes', 'Gestion du stock', 'Art de la Table', 'Pâtisserie', 'Paramètres & devise'],
   },
   {
     name: 'Le Croissance',
-    price: '399',
+    fullPrice: 499,
+    launchPrice: 399,
     badge: { label: 'Le plus populaire', bg: 'rgba(29,158,117,0.18)', color: ACCENTL },
     highlight: true,
     features: ['Tout l\'Essentiel +', 'Événements & calculateur', 'Devis & paiements', 'Personnel & Negafa', 'Liste de courses'],
   },
   {
     name: "L'Élite",
-    price: '699',
+    fullPrice: 699,
+    launchPrice: 599,
     badge: { label: 'Pour les pros', bg: 'rgba(124,58,237,0.18)', color: '#c4b5fd' },
     highlight: false,
     features: ['Tout le Croissance +', 'Comptabilité complète', 'Factures DGI (ICE/IF/RC)', 'Rapports & export', 'Support prioritaire'],
@@ -271,7 +274,9 @@ export default function LandingPagePublic() {
                 )}
                 {!plan.badge && <div style={{ height: 29, marginBottom: 20 }} />}
                 <div style={S.planName}>{plan.name}</div>
-                <div style={S.planPrice}>{plan.price} <span style={{ fontSize: 16, fontWeight: 400, color: MUTED }}>MAD</span></div>
+                <div style={{ textDecoration: 'line-through', color: '#9ca3af', fontSize: 14 }}>{plan.fullPrice} MAD</div>
+                <div style={{ fontSize: 48, fontWeight: 800, color: '#fff', lineHeight: 1.1 }}>{plan.launchPrice} <span style={{ fontSize: 16, fontWeight: 400, color: MUTED }}>MAD</span></div>
+                <div style={{ fontSize: 11, color: '#fbbf24', marginTop: 4, marginBottom: 4 }}>🏷️ Offre de lancement · -100 MAD</div>
                 <div style={S.planPer}>par mois, par établissement</div>
                 <ul style={S.planFeatures}>
                   {plan.features.map(f => (
