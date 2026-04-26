@@ -321,7 +321,10 @@ export default function Facture() {
 
   async function loadInvoices() {
     setLoading(true);
-    let q = supabase.from('invoices').select('*, events(client_name, event_date)').order('created_at', { ascending: false });
+    let q = supabase.from('invoices')
+      .select('*, events(client_name, event_date)')
+      .eq('business_id', profile.business_id)
+      .order('created_at', { ascending: false });
     if (filterStatus) q = q.eq('status', filterStatus);
     const { data } = await q;
     setInvoices(data || []);
@@ -334,7 +337,7 @@ export default function Facture() {
   }
 
   async function generateInvoiceNumber() {
-    const { count } = await supabase.from('invoices').select('*', { count: 'exact', head: true });
+    const { count } = await supabase.from('invoices').select('*', { count: 'exact', head: true }).eq('business_id', profile.business_id);
     const num = String((count || 0) + 1).padStart(4, '0');
     const year = new Date().getFullYear();
     setForm(f => ({ ...f, invoice_number: `INV-${year}-${num}` }));
@@ -392,10 +395,12 @@ export default function Facture() {
     let invoiceId = editingId;
 
     if (editingId) {
-      await supabase.from('invoices').update(payload).eq('id', editingId);
+      const { error: updateErr } = await supabase.from('invoices').update(payload).eq('id', editingId).eq('business_id', profile.business_id);
+      if (updateErr) { console.error(updateErr); alert('Erreur: ' + updateErr.message); return; }
       await supabase.from('invoice_items').delete().eq('invoice_id', editingId);
     } else {
-      const { data } = await supabase.from('invoices').insert([{ ...payload, created_by: profile.id, business_id: profile.business_id }]).select().single();
+      const { data, error } = await supabase.from('invoices').insert([{ ...payload, created_by: profile.id, business_id: profile.business_id }]).select().single();
+      if (error) { console.error(error); alert('Erreur: ' + error.message); return; }
       invoiceId = data?.id;
     }
 
