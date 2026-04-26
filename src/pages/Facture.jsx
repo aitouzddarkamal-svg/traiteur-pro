@@ -576,8 +576,24 @@ export default function Facture() {
                           <td>
                             <div style={{ display: 'flex', gap: 6 }}>
                               <button className="btn btn-ghost btn-sm" onClick={() => openInvoice(inv)} title="Modifier">✏️</button>
-                              {inv.status === 'draft' && <button className="btn btn-sm" style={{ background: '#dbeafe', color: '#2563eb', border: 'none', cursor: 'pointer', borderRadius: 8, fontWeight: 600 }} onClick={() => updateStatus(inv.id, 'sent')}>📤</button>}
-                              {inv.status === 'sent'  && <button className="btn btn-sm" style={{ background: '#d1fae5', color: '#059669', border: 'none', cursor: 'pointer', borderRadius: 8, fontWeight: 600 }} onClick={() => updateStatus(inv.id, 'paid')}>✅</button>}
+                              {inv.status === 'draft' && (
+                                <button
+                                  title="Envoyer"
+                                  onClick={() => updateStatus(inv.id, 'sent')}
+                                  style={{ background: '#eff6ff', color: '#2563eb', border: '1px solid #bfdbfe', borderRadius: 6, padding: '5px 12px', cursor: 'pointer', fontSize: 13, display: 'flex', alignItems: 'center', gap: 4 }}
+                                >
+                                  📤 Envoyer
+                                </button>
+                              )}
+                              {inv.status === 'sent' && (
+                                <button
+                                  title="Marquer payée"
+                                  onClick={() => updateStatus(inv.id, 'paid')}
+                                  style={{ background: '#f0fdf4', color: '#059669', border: '1px solid #a7f3d0', borderRadius: 6, padding: '5px 12px', cursor: 'pointer', fontSize: 13, display: 'flex', alignItems: 'center', gap: 4 }}
+                                >
+                                  ✅ Payée
+                                </button>
+                              )}
                               <button
                                 onClick={() => handleShareInvoice(inv)}
                                 style={{
