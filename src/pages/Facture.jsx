@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext, useRef } from 'react';
+import { jsPDF } from 'jspdf';
 import { supabase } from '../lib/supabaseClient';
 import { AuthContext } from '../context/AuthContext';
 import DateInput from '../components/DateInput';
@@ -508,6 +509,174 @@ export default function Facture() {
     alert('✅ Paiement enregistré — facture marquée payée');
   }
 
+  async function handleDownloadPDF(invoice) {
+    const { data: bp } = await supabase
+      .from('business_profiles')
+      .select('business_name, address, phone, ice, if_number, rc')
+      .eq('business_id', profile.business_id)
+      .single();
+
+    const { data: items } = await supabase
+      .from('invoice_items')
+      .select('*')
+      .eq('invoice_id', invoice.id);
+
+    const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+    const W = 210;
+    const ml = 15;
+    const cW = W - ml * 2;
+    const n2 = (n) => Number(n || 0).toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    let y = 0;
+
+    // Purple header band
+    doc.setFillColor(124, 58, 237);
+    doc.rect(0, 0, W, 38, 'F');
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(18);
+    doc.setFont('helvetica', 'bold');
+    doc.text(bp?.business_name || biz.business_name || 'Votre Entreprise', ml, 14);
+    doc.setFontSize(8.5);
+    doc.setFont('helvetica', 'normal');
+    const bizContact = [bp?.phone || biz.phone, bp?.address || biz.address].filter(Boolean).join('  ·  ');
+    if (bizContact) doc.text(bizContact, ml, 21);
+    const legalLine = [bp?.ice && `ICE: ${bp.ice}`, bp?.if_number && `IF: ${bp.if_number}`, bp?.rc && `RC: ${bp.rc}`].filter(Boolean).join('  ·  ');
+    if (legalLine) doc.text(legalLine, ml, 27);
+    doc.setFontSize(20);
+    doc.setFont('helvetica', 'bold');
+    doc.text('FACTURE', W - ml, 14, { align: 'right' });
+    doc.setFontSize(12);
+    doc.text(`#${invoice.invoice_number}`, W - ml, 22, { align: 'right' });
+    doc.setFontSize(9);
+    doc.text(STATUS_CONFIG[invoice.status]?.label || invoice.status, W - ml, 30, { align: 'right' });
+
+    y = 46;
+
+    // Invoice meta row
+    doc.setFontSize(8);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(130, 130, 130);
+    doc.text("DATE D'ÉMISSION", ml, y);
+    doc.text("DATE D'ÉCHÉANCE", ml + 58, y);
+    doc.text('STATUT', ml + 116, y);
+    y += 5;
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    doc.setTextColor(26, 29, 46);
+    doc.text(fmtDate(invoice.issue_date), ml, y);
+    doc.text(fmtDate(invoice.due_date), ml + 58, y);
+    doc.text(STATUS_CONFIG[invoice.status]?.label || '—', ml + 116, y);
+    y += 9;
+    doc.setDrawColor(220, 220, 225);
+    doc.line(ml, y, W - ml, y);
+    y += 8;
+
+    // Client section
+    doc.setFontSize(8);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(130, 130, 130);
+    doc.text('FACTURÉ À', ml, y);
+    y += 5;
+    doc.setFontSize(12);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(26, 29, 46);
+    doc.text(invoice.client_name || '—', ml, y);
+    y += 6;
+    doc.setFontSize(9.5);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(80, 80, 80);
+    if (invoice.client_phone) { doc.text(`Tél: ${invoice.client_phone}`, ml, y); y += 5; }
+    if (invoice.client_address) { doc.text(invoice.client_address, ml, y); y += 5; }
+    y += 6;
+    doc.setDrawColor(220, 220, 225);
+    doc.line(ml, y, W - ml, y);
+    y += 8;
+
+    // Items table header
+    doc.setFillColor(248, 249, 252);
+    doc.rect(ml, y - 2, cW, 9, 'F');
+    doc.setFontSize(8.5);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(100, 100, 110);
+    doc.text('DÉSIGNATION', ml + 2, y + 4);
+    doc.text('QTÉ', ml + 98, y + 4, { align: 'right' });
+    doc.text('PRIX UNIT.', ml + 130, y + 4, { align: 'right' });
+    doc.text('TOTAL', W - ml - 2, y + 4, { align: 'right' });
+    y += 11;
+
+    // Item rows
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(26, 29, 46);
+    for (const item of (items || [])) {
+      const descLines = doc.splitTextToSize(item.description || '—', 88);
+      doc.setFontSize(9.5);
+      doc.text(descLines, ml + 2, y);
+      doc.text(String(item.quantity || 0), ml + 98, y, { align: 'right' });
+      doc.text(`${n2(item.unit_price)} MAD`, ml + 130, y, { align: 'right' });
+      doc.setFont('helvetica', 'bold');
+      doc.text(`${n2(item.total)} MAD`, W - ml - 2, y, { align: 'right' });
+      doc.setFont('helvetica', 'normal');
+      y += descLines.length * 5.5 + 4;
+      doc.setDrawColor(235, 235, 240);
+      doc.line(ml, y, W - ml, y);
+      y += 3;
+    }
+    y += 5;
+
+    // Totals block
+    const subtotalPDF = (items || []).reduce((s, i) => s + (i.total || 0), 0);
+    const taxRatePDF = invoice.tax_rate || 0;
+    const taxAmtPDF = subtotalPDF * taxRatePDF / 100;
+    const totalTTC = subtotalPDF + taxAmtPDF;
+    const totX = W - ml - 72;
+
+    doc.setFontSize(9.5);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(80, 80, 80);
+    doc.text('Sous-total HT', totX, y);
+    doc.text(`${n2(subtotalPDF)} MAD`, W - ml - 2, y, { align: 'right' });
+    y += 7;
+    if (taxRatePDF > 0) {
+      doc.text(`TVA (${taxRatePDF}%)`, totX, y);
+      doc.text(`${n2(taxAmtPDF)} MAD`, W - ml - 2, y, { align: 'right' });
+      y += 7;
+    }
+    doc.setFillColor(124, 58, 237);
+    doc.rect(totX - 3, y - 4, W - ml - totX + 5, 10, 'F');
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'bold');
+    doc.text('TOTAL TTC', totX, y + 3);
+    doc.text(`${n2(totalTTC)} MAD`, W - ml - 2, y + 3, { align: 'right' });
+    y += 14;
+
+    // Notes
+    if (invoice.notes) {
+      y += 4;
+      doc.setFontSize(9);
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(100, 100, 100);
+      doc.text('Notes :', ml, y);
+      y += 5;
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(60, 60, 60);
+      const noteLines = doc.splitTextToSize(invoice.notes, cW);
+      doc.text(noteLines, ml, y);
+      y += noteLines.length * 5 + 4;
+    }
+
+    // Footer
+    const footerY = Math.max(y + 10, 278);
+    doc.setDrawColor(200, 200, 200);
+    doc.line(ml, footerY, W - ml, footerY);
+    doc.setFontSize(7.5);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(160, 160, 160);
+    doc.text('Document généré par Traiteur Pro', ml, footerY + 5);
+    if (bp?.ice) doc.text(`ICE: ${bp.ice}`, W - ml, footerY + 5, { align: 'right' });
+
+    doc.save(`Facture-${invoice.invoice_number}.pdf`);
+  }
+
   /* ═══ RENDER ═══ */
   return (
     <>
@@ -639,6 +808,15 @@ export default function Facture() {
                               >
                                 🔗 Partager
                               </button>
+                              {profile?.plan_id === 'elite' && (
+                                <button
+                                  title="Télécharger PDF"
+                                  onClick={() => handleDownloadPDF(inv)}
+                                  style={{ background: '#7c3aed', color: '#fff', border: 'none', borderRadius: 6, padding: '5px 12px', cursor: 'pointer', fontSize: 13 }}
+                                >
+                                  📄 PDF
+                                </button>
+                              )}
                               <button className="btn btn-danger btn-sm" onClick={() => deleteInvoice(inv.id)} title="Supprimer">🗑️</button>
                             </div>
                           </td>
