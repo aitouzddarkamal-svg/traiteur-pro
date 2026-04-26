@@ -283,7 +283,6 @@ export default function Facture() {
   const [filterStatus, setFilterStatus] = useState('');
 
   /* ── Events for linking ── */
-  const [eventsList, setEventsList] = useState([]);
   const [evenements, setEvenements] = useState([]);
 
   /* ── Business settings ── */
@@ -299,7 +298,6 @@ export default function Facture() {
   useEffect(() => {
     if (!profile?.id) return;
     loadInvoices();
-    loadEvents();
     loadBizSettings();
     generateInvoiceNumber();
   }, [profile?.id]);
@@ -322,18 +320,14 @@ export default function Facture() {
   async function loadInvoices() {
     setLoading(true);
     let q = supabase.from('invoices')
-      .select('*, events(client_name, event_date)')
+      .select('*')
       .eq('business_id', profile.business_id)
       .order('created_at', { ascending: false });
     if (filterStatus) q = q.eq('status', filterStatus);
-    const { data } = await q;
+    const { data, error } = await q;
+    if (error) console.error('loadInvoices:', error);
     setInvoices(data || []);
     setLoading(false);
-  }
-
-  async function loadEvents() {
-    const { data } = await supabase.from('events').select('id, client_name, event_date, total_amount').order('event_date', { ascending: false }).limit(50);
-    setEventsList(data || []);
   }
 
   async function generateInvoiceNumber() {
