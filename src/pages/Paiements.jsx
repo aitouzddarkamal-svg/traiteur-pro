@@ -91,6 +91,8 @@ export default function Paiements() {
   const isAdmin = profile?.role === 'admin'
   const canViewFinances = canDo(profile?.role, 'canViewFinances')
   const [errors, setErrors] = useState({})
+  const [invoicePayments, setInvoicePayments] = useState([])
+  const [invoicePaymentsLoading, setInvoicePaymentsLoading] = useState(false)
 
   useEffect(() => {
     if (!profile?.business_id) return
@@ -100,6 +102,21 @@ export default function Paiements() {
       .eq('business_id', profile.business_id)
       .order('event_date', { ascending: false })
       .then(({ data }) => setEvents(data || []))
+  }, [profile?.business_id])
+
+  useEffect(() => {
+    if (!profile?.business_id) return
+    setInvoicePaymentsLoading(true)
+    supabase
+      .from('payments')
+      .select('*, invoices(invoice_number, client_name)')
+      .eq('business_id', profile.business_id)
+      .not('invoice_id', 'is', null)
+      .order('payment_date', { ascending: false })
+      .then(({ data }) => {
+        setInvoicePayments(data || [])
+        setInvoicePaymentsLoading(false)
+      })
   }, [profile?.business_id])
 
   async function handleSelectEvent(eventId) {
@@ -418,6 +435,51 @@ export default function Paiements() {
           </div>
         </>
       )}
+
+      {/* Invoice Payments Section */}
+      <div style={S.card}>
+        <div style={S.cardTitle}>💳 Paiements reçus via Factures</div>
+        {invoicePaymentsLoading ? (
+          <div style={S.emptyState}>Chargement...</div>
+        ) : invoicePayments.length === 0 ? (
+          <div style={S.emptyState}>Aucun paiement facture enregistré.</div>
+        ) : (
+          <table style={S.table}>
+            <thead>
+              <tr>
+                <th style={S.th}>Date</th>
+                <th style={S.th}>Client</th>
+                <th style={S.th}>N° Facture</th>
+                <th style={S.th}>Méthode</th>
+                <th style={{ ...S.th, textAlign: 'right' }}>Montant (MAD)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {invoicePayments.map(p => (
+                <tr key={p.id}>
+                  <td style={S.td}>
+                    {p.payment_date
+                      ? new Date(p.payment_date).toLocaleDateString('fr-FR', { day: '2-digit', month: 'short', year: 'numeric' })
+                      : '—'}
+                  </td>
+                  <td style={S.td}>{p.invoices?.client_name || '—'}</td>
+                  <td style={{ ...S.td, fontWeight: 700, color: '#7c3aed' }}>
+                    #{p.invoices?.invoice_number || '—'}
+                  </td>
+                  <td style={S.td}>
+                    <span style={{ ...S.badge, ...(methodColors[p.method] || { background: '#f0efeb', color: '#6b6b66' }) }}>
+                      {methodLabels[p.method] || p.method || '—'}
+                    </span>
+                  </td>
+                  <td style={{ ...S.td, textAlign: 'right', fontWeight: 700, color: '#166534' }}>
+                    {fmt(p.amount)}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
 
       {/* Delete Confirmation Modal */}
       {confirmDelete && (

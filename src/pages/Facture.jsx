@@ -295,6 +295,11 @@ export default function Facture() {
   const [editingId, setEditingId] = useState(null);
   const [previewMode, setPreviewMode] = useState(false);
 
+  /* ── Payment modal ── */
+  const [paymentModal, setPaymentModal] = useState(null);
+  const [paymentForm, setPaymentForm] = useState({ method: 'cash', reference: '', date: today() });
+  const [paymentSaving, setPaymentSaving] = useState(false);
+
   useEffect(() => {
     if (!profile?.id) return;
     loadInvoices();
@@ -477,6 +482,32 @@ export default function Facture() {
       .catch(() => prompt('Copiez ce lien :', url))
   }
 
+  async function handleConfirmPayment() {
+    if (!paymentModal) return;
+    setPaymentSaving(true);
+    const { error: pErr } = await supabase.from('payments').insert({
+      business_id:  profile.business_id,
+      invoice_id:   paymentModal.id,
+      event_id:     paymentModal.event_id || null,
+      payment_type: 'balance',
+      method:       paymentForm.method,
+      amount:       paymentModal.total,
+      payment_date: paymentForm.date,
+      notes:        paymentForm.reference || null,
+      recorded_by:  profile.id,
+    });
+    if (pErr) { alert('Erreur paiement: ' + pErr.message); setPaymentSaving(false); return; }
+    const { error: iErr } = await supabase.from('invoices')
+      .update({ status: 'paid' })
+      .eq('id', paymentModal.id)
+      .eq('business_id', profile.business_id);
+    if (iErr) { alert('Erreur mise à jour facture: ' + iErr.message); setPaymentSaving(false); return; }
+    setPaymentModal(null);
+    setPaymentSaving(false);
+    loadInvoices();
+    alert('✅ Paiement enregistré — facture marquée payée');
+  }
+
   /* ═══ RENDER ═══ */
   return (
     <>
@@ -588,7 +619,7 @@ export default function Facture() {
                               {inv.status === 'sent' && (
                                 <button
                                   title="Marquer payée"
-                                  onClick={() => updateStatus(inv.id, 'paid')}
+                                  onClick={() => { setPaymentModal(inv); setPaymentForm({ method: 'cash', reference: '', date: today() }); }}
                                   style={{ background: '#f0fdf4', color: '#059669', border: '1px solid #a7f3d0', borderRadius: 6, padding: '5px 12px', cursor: 'pointer', fontSize: 13, display: 'flex', alignItems: 'center', gap: 4 }}
                                 >
                                   ✅ Payée
@@ -772,6 +803,75 @@ export default function Facture() {
         )}
 
       </div>
+
+      {/* ── PAYMENT MODAL ── */}
+      {paymentModal && (
+        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2000 }}>
+          <div style={{ background: '#fff', borderRadius: 14, padding: '2rem', width: 440, boxShadow: '0 20px 60px rgba(0,0,0,0.2)' }}>
+            <h3 style={{ fontSize: 17, fontWeight: 700, color: '#1a1d2e', marginBottom: 20 }}>💳 Enregistrer le paiement reçu</h3>
+
+            <div style={{ marginBottom: 16 }}>
+              <label style={{ display: 'block', fontSize: 12, fontWeight: 700, color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: 6 }}>Méthode</label>
+              <select
+                value={paymentForm.method}
+                onChange={e => setPaymentForm(f => ({ ...f, method: e.target.value }))}
+                style={{ width: '100%', padding: '10px 14px', border: '1.5px solid #e5e7eb', borderRadius: 10, fontSize: 14, color: '#1a1d2e', background: '#fff', outline: 'none' }}
+              >
+                <option value="cash">Espèces</option>
+                <option value="cheque">Chèque</option>
+                <option value="bank_transfer">Virement</option>
+              </select>
+            </div>
+
+            <div style={{ marginBottom: 16 }}>
+              <label style={{ display: 'block', fontSize: 12, fontWeight: 700, color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: 6 }}>Référence</label>
+              <input
+                type="text"
+                placeholder="N° chèque, référence virement..."
+                value={paymentForm.reference}
+                onChange={e => setPaymentForm(f => ({ ...f, reference: e.target.value }))}
+                style={{ width: '100%', padding: '10px 14px', border: '1.5px solid #e5e7eb', borderRadius: 10, fontSize: 14, color: '#1a1d2e', background: '#fff', outline: 'none', boxSizing: 'border-box' }}
+              />
+            </div>
+
+            <div style={{ marginBottom: 16 }}>
+              <label style={{ display: 'block', fontSize: 12, fontWeight: 700, color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: 6 }}>Date</label>
+              <input
+                type="date"
+                value={paymentForm.date}
+                onChange={e => setPaymentForm(f => ({ ...f, date: e.target.value }))}
+                style={{ width: '100%', padding: '10px 14px', border: '1.5px solid #e5e7eb', borderRadius: 10, fontSize: 14, color: '#1a1d2e', background: '#fff', outline: 'none', boxSizing: 'border-box' }}
+              />
+            </div>
+
+            <div style={{ marginBottom: 24 }}>
+              <label style={{ display: 'block', fontSize: 12, fontWeight: 700, color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: 6 }}>Montant</label>
+              <input
+                type="number"
+                value={paymentModal.total}
+                readOnly
+                style={{ width: '100%', padding: '10px 14px', border: '1.5px solid #e5e7eb', borderRadius: 10, fontSize: 14, color: '#6b7280', background: '#f9fafb', outline: 'none', boxSizing: 'border-box' }}
+              />
+            </div>
+
+            <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end' }}>
+              <button
+                onClick={() => setPaymentModal(null)}
+                style={{ padding: '10px 20px', borderRadius: 9, border: '1.5px solid #e5e7eb', background: '#fff', color: '#374151', fontSize: 14, fontWeight: 500, cursor: 'pointer' }}
+              >
+                Annuler
+              </button>
+              <button
+                onClick={handleConfirmPayment}
+                disabled={paymentSaving}
+                style={{ padding: '10px 20px', borderRadius: 9, border: 'none', background: '#10b981', color: '#fff', fontSize: 14, fontWeight: 600, cursor: 'pointer', opacity: paymentSaving ? 0.7 : 1 }}
+              >
+                {paymentSaving ? 'Enregistrement...' : '✅ Confirmer le paiement'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
