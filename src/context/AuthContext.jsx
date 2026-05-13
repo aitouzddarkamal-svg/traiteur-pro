@@ -24,10 +24,29 @@ export function AuthProvider({ children }) {
       // Fetch subscription plan for this business
       const { data: sub } = await supabase
         .from('subscriptions')
-        .select('plan_id')
+        .select('plan_id, is_trial, trial_ends_at')
         .eq('business_id', data.business_id)
         .single()
-      const profileWithPlan = { ...data, plan_id: sub?.plan_id || 'essentiel' }
+
+      const subscription = sub || {}
+
+      // Trial expiry check — auto-downgrade if expired
+      const now = new Date()
+      const trialEnd = subscription.trial_ends_at ? new Date(subscription.trial_ends_at) : null
+      if (subscription.is_trial && trialEnd && now > trialEnd) {
+        await supabase.from('subscriptions')
+          .update({ plan_id: 'essentiel', is_trial: false })
+          .eq('business_id', data.business_id)
+        subscription.plan_id = 'essentiel'
+        subscription.is_trial = false
+      }
+
+      const profileWithPlan = {
+        ...data,
+        plan_id: subscription.plan_id || 'essentiel',
+        is_trial: subscription.is_trial || false,
+        trial_ends_at: subscription.trial_ends_at || null,
+      }
       localStorage.setItem('tp_profile', JSON.stringify(profileWithPlan))
       setProfile(profileWithPlan)
       return profileWithPlan

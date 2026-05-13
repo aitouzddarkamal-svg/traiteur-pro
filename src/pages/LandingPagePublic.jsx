@@ -264,6 +264,9 @@ export default function LandingPagePublic() {
       <div id="pricing">
         <div style={ms.section || S.section}>
           <h2 style={S.sectionTitle}>Choisissez votre plan</h2>
+          <p style={{ textAlign: 'center', fontSize: 14, color: ACCENTL, marginBottom: 28, marginTop: -24 }}>
+            Aucune carte bancaire requise · Annulez à tout moment
+          </p>
           <div style={ms.pricingGrid || S.pricingGrid}>
             {PLANS.map(plan => (
               <div key={plan.name} style={plan.highlight ? S.priceCardHL : S.priceCard}>
@@ -274,6 +277,7 @@ export default function LandingPagePublic() {
                 )}
                 {!plan.badge && <div style={{ height: 29, marginBottom: 20 }} />}
                 <div style={S.planName}>{plan.name}</div>
+                <div style={{ fontSize: 12, color: '#4ade80', fontWeight: 500, marginBottom: 6 }}>✅ 30 jours d'essai gratuit</div>
                 <div style={{ textDecoration: 'line-through', color: '#9ca3af', fontSize: 14 }}>{plan.fullPrice} MAD</div>
                 <div style={{ fontSize: 48, fontWeight: 800, color: '#fff', lineHeight: 1.1 }}>{plan.launchPrice} <span style={{ fontSize: 16, fontWeight: 400, color: MUTED }}>MAD</span></div>
                 <div style={{ fontSize: 11, color: '#fbbf24', marginTop: 4, marginBottom: 4 }}>🏷️ Offre de lancement · -100 MAD</div>
@@ -295,6 +299,9 @@ export default function LandingPagePublic() {
                 </button>
               </div>
             ))}
+          </div>
+          <div style={{ textAlign: 'center', marginTop: 32, fontSize: 15, color: ACCENTL, fontWeight: 500 }}>
+            🎁 Commencez gratuitement — 30 jours d'essai, aucune carte requise
           </div>
         </div>
       </div>

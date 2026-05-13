@@ -109,7 +109,9 @@ export default function Register() {
 
     const { error: subErr } = await supabase.from('subscriptions').insert({
       business_id: newBizId,
-      plan_id: form.plan,
+      plan_id: 'croissance',
+      is_trial: true,
+      trial_ends_at: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
     });
 
     if (subErr) {
@@ -152,7 +154,7 @@ export default function Register() {
         <p style={S.title}>Créer votre compte</p>
         <p style={S.subtitle}>Démarrez en 2 minutes — sans carte bancaire.</p>
 
-        <div style={S.badge}>🎁 Essai gratuit 14 jours · Toutes fonctionnalités incluses</div>
+        <div style={S.badge}>🎁 Essai gratuit 30 jours · Accès complet Plan Croissance</div>
 
         {banner && (
           <div style={banner.type === 'success' ? S.successBox : S.errorBox}>
@@ -260,7 +262,7 @@ export default function Register() {
 
         <div style={S.foot}>
           <div style={{ marginBottom: 6, fontSize: 12, color: '#aaa' }}>
-            Essai gratuit 14 jours · Sans carte bancaire
+            Essai gratuit 30 jours · Sans carte bancaire
           </div>
           Déjà un compte ?{' '}
           <Link to="/login" style={S.link}>Connexion →</Link>

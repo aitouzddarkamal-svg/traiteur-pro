@@ -63,6 +63,50 @@ const navLabels = {
   admin:       'Mes clients',
 }
 
+const TrialBanner = ({ profile, navigate }) => {
+  if (!profile?.is_trial) return null
+  const daysLeft = Math.ceil(
+    (new Date(profile.trial_ends_at) - new Date()) / (1000 * 60 * 60 * 24)
+  )
+  const text = daysLeft > 7
+    ? `🎁 Essai gratuit — ${daysLeft} jours restants · Accès complet Plan Croissance`
+    : daysLeft > 0
+    ? `⚠️ Essai se termine dans ${daysLeft} jours — Activez votre plan pour continuer`
+    : `🔒 Votre essai a expiré — Choisissez un plan pour continuer`
+  return (
+    <div style={{
+      background: 'linear-gradient(135deg, #7c3aed, #4f46e5)',
+      color: '#fff',
+      textAlign: 'center',
+      padding: '10px 1rem',
+      fontSize: 13,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: 16,
+      flexShrink: 0,
+    }}>
+      <span>{text}</span>
+      <button
+        onClick={() => navigate('/settings')}
+        style={{
+          background: 'rgba(255,255,255,0.2)',
+          color: '#fff',
+          border: '1px solid rgba(255,255,255,0.4)',
+          borderRadius: 4,
+          padding: '2px 10px',
+          fontSize: 12,
+          cursor: 'pointer',
+          fontWeight: 600,
+          flexShrink: 0,
+        }}
+      >
+        Voir les plans →
+      </button>
+    </div>
+  )
+}
+
 const DemoBanner = () => (
   <div style={{
     background: '#f59e0b',
@@ -270,7 +314,8 @@ export default function Layout({ children }) {
           </button>
         </div>
 
-        {/* ✅ DEMO BANNER — mobile */}
+        {/* ✅ TRIAL + DEMO BANNER — mobile */}
+        <TrialBanner profile={profile} navigate={navigate} />
         <DemoBanner />
         {profile?.plan_id === 'essentiel' && <UpgradeBanner />}
 
@@ -337,7 +382,8 @@ export default function Layout({ children }) {
         <SidebarContent />
       </aside>
       <main style={{ flex: 1, background: '#f8f7f4', overflowY: 'auto', display: 'flex', flexDirection: 'column' }}>
-        {/* ✅ DEMO BANNER — desktop */}
+        {/* ✅ TRIAL + DEMO BANNER — desktop */}
+        <TrialBanner profile={profile} navigate={navigate} />
         <DemoBanner />
         {profile?.plan_id === 'essentiel' && <UpgradeBanner />}
         <div style={{ flex: 1, overflowY: 'auto' }}>
