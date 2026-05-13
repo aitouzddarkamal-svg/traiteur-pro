@@ -320,7 +320,7 @@ export default function LandingPagePublic() {
             onClick={() => navigate('/register')}
             onMouseEnter={e => e.currentTarget.style.opacity = '0.88'}
             onMouseLeave={e => e.currentTarget.style.opacity = '1'}>
-            Essai gratuit 14 jours · sans carte bancaire
+            Essai gratuit 30 jours · sans carte bancaire
           </button>
         </div>
       </div>
