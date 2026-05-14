@@ -34,7 +34,7 @@ export default function Login() {
           <p style={{ fontSize: '14px', color: '#6b6b66' }}>Connectez-vous à votre espace</p>
         </div>
 
-        {/* Bannière essai 14 jours */}
+        {/* Bannière essai 30 jours */}
         <div style={{ background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: '8px', padding: '10px 14px', marginBottom: '1.5rem', textAlign: 'center', direction: 'ltr', unicodeBidi: 'embed' }}>
           <span style={{
             fontSize: '13px',
@@ -44,7 +44,7 @@ export default function Login() {
             unicodeBidi: 'embed',
             display: 'inline-block'
           }}>
-            🎉 14 jours d&apos;essai gratuit · Sans carte bancaire
+            🎁 30 jours d&apos;essai gratuit · Sans carte bancaire
           </span>
         </div>
 

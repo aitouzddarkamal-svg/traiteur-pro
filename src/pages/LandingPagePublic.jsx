@@ -264,7 +264,7 @@ export default function LandingPagePublic() {
       <div id="pricing">
         <div style={ms.section || S.section}>
           <h2 style={S.sectionTitle}>Choisissez votre plan</h2>
-          <p style={{ textAlign: 'center', fontSize: 14, color: ACCENTL, marginBottom: 28, marginTop: -24 }}>
+          <p style={{ textAlign: 'center', fontSize: 14, color: ACCENTL, marginBottom: 28, marginTop: 16 }}>
             Aucune carte bancaire requise · Annulez à tout moment
           </p>
           <div style={ms.pricingGrid || S.pricingGrid}>
