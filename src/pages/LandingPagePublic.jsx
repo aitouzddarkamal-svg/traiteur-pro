@@ -310,8 +310,8 @@ export default function LandingPagePublic() {
       <div style={S.ctaWrap}>
         <div style={S.ctaInner}>
           <h2 style={S.ctaTitle}>
-            Rejoignez les traiteurs marocains<br />
-            qui gèrent leur activité comme des pros.
+            Votre traiteur mérite mieux<br />
+            qu'Excel et WhatsApp.
           </h2>
           <p style={{ fontSize: 14, color: MUTED, marginTop: 12 }}>
             Aucune carte bancaire requise · Accès immédiat · Support en français et arabe
