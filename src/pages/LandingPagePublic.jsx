@@ -192,6 +192,14 @@ export default function LandingPagePublic() {
 
       {/* ── HERO ── */}
       <div style={{ position: 'relative' }}>
+        <div style={{
+          position: 'absolute', inset: 0,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='0.8'%3E%3Crect x='10' y='10' width='60' height='60' transform='rotate(45 40 40)'/%3E%3Crect x='15' y='15' width='50' height='50'/%3E%3Ccircle cx='40' cy='40' r='20'/%3E%3Cline x1='40' y1='10' x2='40' y2='70'/%3E%3Cline x1='10' y1='40' x2='70' y2='40'/%3E%3Cline x1='18' y1='18' x2='62' y2='62'/%3E%3Cline x1='62' y1='18' x2='18' y2='62'/%3E%3C/g%3E%3C/svg%3E")`,
+          backgroundRepeat: 'repeat',
+          backgroundSize: '80px 80px',
+          opacity: 0.06,
+          pointerEvents: 'none',
+        }} />
         <div style={{ ...S.hero, ...(ms.hero || {}) }}>
           <HexPattern />
           <div style={S.glow} />
