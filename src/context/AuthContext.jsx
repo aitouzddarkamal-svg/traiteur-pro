@@ -41,11 +41,18 @@ export function AuthProvider({ children }) {
         subscription.is_trial = false
       }
 
+      const { data: bpMeta } = await supabase
+        .from('business_profiles')
+        .select('onboarding_complete')
+        .eq('business_id', data.business_id)
+        .maybeSingle()
+
       const profileWithPlan = {
         ...data,
         plan_id: subscription.plan_id || 'essentiel',
         is_trial: subscription.is_trial || false,
         trial_ends_at: subscription.trial_ends_at || null,
+        onboarding_complete: bpMeta?.onboarding_complete ?? null,
       }
       localStorage.setItem('tp_profile', JSON.stringify(profileWithPlan))
       setProfile(profileWithPlan)
@@ -60,6 +67,14 @@ export function AuthProvider({ children }) {
     const prof = await fetchAndCacheProfile(authData.user)
     if (!prof) throw new Error('Compte introuvable ou désactivé.')
     return prof
+  }
+
+  function updateProfile(updates) {
+    setProfile(prev => {
+      const updated = { ...prev, ...updates }
+      localStorage.setItem('tp_profile', JSON.stringify(updated))
+      return updated
+    })
   }
 
   async function signOut() {
@@ -103,7 +118,7 @@ export function AuthProvider({ children }) {
   }, [])
 
   return (
-    <AuthContext.Provider value={{ user, profile, loading, signIn, signOut }}>
+    <AuthContext.Provider value={{ user, profile, loading, signIn, signOut, updateProfile }}>
       {children}
     </AuthContext.Provider>
   )

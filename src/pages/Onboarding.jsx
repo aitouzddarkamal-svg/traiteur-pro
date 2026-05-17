@@ -7,28 +7,28 @@ const S = {
   wrap:       { minHeight: '100vh', background: '#f9f8f5', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24, direction: 'ltr', textAlign: 'left' },
   card:       { background: '#fff', borderRadius: 16, padding: 40, width: '100%', maxWidth: 560, boxShadow: '0 4px 24px rgba(0,0,0,0.08)', direction: 'ltr', textAlign: 'left' },
   logo:       { display: 'flex', alignItems: 'center', gap: 8, marginBottom: 32 },
-  logoDot:    { width: 10, height: 10, borderRadius: '50%', background: '#2d6a4f' },
+  logoDot:    { width: 10, height: 10, borderRadius: '50%', background: '#6B2737' },
   logoText:   { fontSize: 18, fontWeight: 700, color: '#1a1a18' },
   progress:   { display: 'flex', gap: 8, marginBottom: 32 },
   step:       { height: 4, flex: 1, borderRadius: 2, background: '#e5e4e0' },
-  stepActive: { background: '#2d6a4f' },
+  stepActive: { background: '#6B2737' },
   title:      { fontSize: 22, fontWeight: 700, color: '#1a1a18', marginBottom: 6 },
   subtitle:   { fontSize: 14, color: '#888', marginBottom: 28 },
   formRow:    { marginBottom: 16 },
   label:      { fontSize: 12, color: '#555', marginBottom: 4, display: 'block', fontWeight: 500 },
   input:      { width: '100%', padding: '10px 14px', borderRadius: 8, border: '1px solid #ddd', fontSize: 14, outline: 'none', boxSizing: 'border-box' },
   row2:       { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 },
-  btnPrimary: { background: '#2d6a4f', color: '#fff', border: 'none', borderRadius: 8, padding: '12px 24px', fontSize: 14, fontWeight: 600, cursor: 'pointer', width: '100%' },
+  btnPrimary: { background: '#6B2737', color: '#fff', border: 'none', borderRadius: 8, padding: '12px 24px', fontSize: 14, fontWeight: 600, cursor: 'pointer', width: '100%' },
   btnSkip:    { background: 'transparent', color: '#888', border: 'none', fontSize: 13, cursor: 'pointer', width: '100%', marginTop: 10, textDecoration: 'underline' },
   btnRow:     { display: 'flex', gap: 10, marginTop: 8 },
   btnBack:    { background: 'transparent', color: '#555', border: '1px solid #ddd', borderRadius: 8, padding: '12px 24px', fontSize: 14, cursor: 'pointer', flex: 1 },
-  infoBox:    { background: '#f0fdf4', border: '1px solid #c3e6d4', borderRadius: 8, padding: '10px 14px', fontSize: 13, color: '#166534', marginBottom: 16 },
+  infoBox:    { background: 'rgba(107,39,55,0.08)', border: '1px solid #D4A853', borderRadius: 8, padding: '10px 14px', fontSize: 13, color: '#D4A853', marginBottom: 16 },
 };
 
 const STEPS = ['Entreprise', 'Légal', 'Prêt !'];
 
 export default function Onboarding() {
-  const { profile } = useAuth();
+  const { profile, updateProfile } = useAuth();
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
   const [saving, setSaving] = useState(false);
@@ -77,7 +77,7 @@ export default function Onboarding() {
         <div style={S.progress}>
           {STEPS.map((s, i) => (
             <div key={s} style={{ flex: 1 }}>
-              <div style={{ fontSize: 10, color: i <= step ? '#2d6a4f' : '#bbb', marginBottom: 4, fontWeight: 500 }}>{i + 1}. {s}</div>
+              <div style={{ fontSize: 10, color: i <= step ? '#6B2737' : '#bbb', marginBottom: 4, fontWeight: 500 }}>{i + 1}. {s}</div>
               <div style={{ ...S.step, ...(i <= step ? S.stepActive : {}) }} />
             </div>
           ))}
@@ -152,13 +152,22 @@ export default function Onboarding() {
             <div style={{ fontSize: 48, textAlign: 'center', marginBottom: 16 }}>✅</div>
             <p style={{ ...S.title, textAlign: 'center' }}>Votre espace est prêt !</p>
             <p style={{ ...S.subtitle, textAlign: 'center' }}>Voici vos premières étapes recommandées.</p>
-            <div style={{ background: '#f0fdf4', borderRadius: 10, padding: 16, marginBottom: 20 }}>
-              <p style={{ fontSize: 13, fontWeight: 600, color: '#166534', marginBottom: 8 }}>Par où commencer :</p>
+            <div style={{ background: 'rgba(107,39,55,0.08)', borderRadius: 10, padding: 16, marginBottom: 20 }}>
+              <p style={{ fontSize: 13, fontWeight: 600, color: '#D4A853', marginBottom: 8 }}>Par où commencer :</p>
               <p style={{ fontSize: 13, color: '#555', marginBottom: 6 }}>1. 🍽 Ajoutez vos plats dans Plats</p>
               <p style={{ fontSize: 13, color: '#555', marginBottom: 6 }}>2. 📦 Ajoutez vos ingrédients dans Stock</p>
               <p style={{ fontSize: 13, color: '#555' }}>3. 📅 Créez votre premier événement</p>
             </div>
-            <button style={S.btnPrimary} onClick={() => navigate('/')}>Accéder au tableau de bord →</button>
+            <button style={S.btnPrimary} onClick={async () => {
+              const { error } = await supabase
+                .from('business_profiles')
+                .update({ onboarding_complete: true })
+                .eq('business_id', profile.business_id)
+              if (!error) {
+                updateProfile({ onboarding_complete: true })
+                navigate('/')
+              }
+            }}>Accéder au tableau de bord →</button>
           </>
         )}
       </div>

@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { AuthProvider, useAuth } from './context/AuthContext'
-import { supabase } from './lib/supabaseClient'
 import Layout from './components/Layout'
 import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
@@ -58,29 +57,6 @@ class ErrorBoundary extends React.Component {
 function ProtectedRoute({ children }) {
   const { user, loading, profile } = useAuth()
   const location = useLocation()
-  const [onboardingChecked, setOnboardingChecked] = useState(false)
-  const [needsOnboarding, setNeedsOnboarding] = useState(false)
-
-  useEffect(() => {
-    async function checkOnboarding() {
-      const SKIP = ['kamal@moorish-automation.com', 'demo@traiteur-pro.com', 'demo@catering-pro.com']
-      if (!profile || SKIP.includes(profile.email)) {
-        setOnboardingChecked(true)
-        return
-      }
-      const { data } = await supabase
-        .from('business_profiles')
-        .select('onboarding_complete')
-        .eq('business_id', profile.business_id)
-        .maybeSingle()
-      if (data && data.onboarding_complete === false) {
-        setNeedsOnboarding(true)
-      }
-      setOnboardingChecked(true)
-    }
-    if (profile) checkOnboarding()
-    else setOnboardingChecked(true)
-  }, [profile])
 
   if (loading) return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh', color: '#6b6b66', fontFamily: 'Inter, sans-serif' }}>
@@ -88,13 +64,11 @@ function ProtectedRoute({ children }) {
     </div>
   )
   if (!user) return <Navigate to="/login" replace />
-  if (!onboardingChecked) return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh', color: '#888', fontSize: 14 }}>
-      Chargement...
-    </div>
-  )
+
+  const SKIP = ['kamal@moorish-automation.com', 'demo@traiteur-pro.com', 'demo@catering-pro.com']
+  const needsOnboarding = profile && !SKIP.includes(profile.email) && profile.onboarding_complete === false
   if (needsOnboarding && location.pathname !== '/onboarding') {
-    return <Navigate to="/onboarding" />
+    return <Navigate to="/onboarding" replace />
   }
   return <Layout>{children}</Layout>
 }
