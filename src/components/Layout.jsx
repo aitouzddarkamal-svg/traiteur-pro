@@ -124,8 +124,8 @@ const DemoBanner = () => (
 
 const UpgradeBanner = () => (
   <div style={{
-    background: '#1a3a2a',
-    color: '#4ade80',
+    background: '#6B2737',
+    color: '#FAF7F2',
     padding: '6px 16px',
     fontSize: '12px',
     fontWeight: '500',
@@ -139,8 +139,8 @@ const UpgradeBanner = () => (
     <button
       onClick={() => window.location.href = '/settings'}
       style={{
-        background: '#4ade80',
-        color: '#000',
+        background: '#D4A853',
+        color: '#2C1810',
         border: 'none',
         borderRadius: 4,
         padding: '2px 10px',
@@ -184,9 +184,9 @@ export default function Layout({ children }) {
     return (
       <>
         {/* Logo */}
-        <div style={{ padding: '0 1.5rem 1.25rem', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+        <div style={{ padding: '1.5rem 1.5rem 1.25rem', borderBottom: '1px solid rgba(212,168,83,0.2)', background: '#5a1f2e', marginTop: '-1.5rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <div style={{ width: '36px', height: '36px', borderRadius: '8px', background: 'rgba(255,255,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+            <div style={{ width: '36px', height: '36px', borderRadius: '8px', background: 'rgba(212,168,83,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
               <span style={{ color: '#fff', fontSize: '18px', fontWeight: '700' }}>T</span>
             </div>
             <div>
@@ -214,13 +214,13 @@ export default function Layout({ children }) {
                   display: 'flex',
                   alignItems: 'center',
                   gap: '10px',
-                  background: isActive ? 'rgba(255,255,255,0.15)' : 'transparent',
-                  borderLeft: isActive ? '3px solid #fff' : '3px solid transparent',
+                  background: isActive ? 'rgba(212,168,83,0.15)' : 'transparent',
+                  borderLeft: isActive ? '3px solid #D4A853' : '3px solid transparent',
                   fontWeight: isActive ? '600' : '400',
-                  color: '#fff',
+                  color: isActive ? '#D4A853' : '#FAF7F2',
                   transition: 'all .15s',
                 }}
-                onMouseEnter={e => { if (!isActive) e.currentTarget.style.background = 'rgba(255,255,255,0.08)' }}
+                onMouseEnter={e => { if (!isActive) e.currentTarget.style.background = 'rgba(212,168,83,0.08)' }}
                 onMouseLeave={e => { if (!isActive) e.currentTarget.style.background = 'transparent' }}
               >
                 <span style={{ fontSize: '17px' }}>{navIcons[item.key] || '•'}</span>
@@ -231,9 +231,9 @@ export default function Layout({ children }) {
         </nav>
 
         {/* User + Déconnexion */}
-        <div style={{ padding: '1rem 1.5rem', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
-          <div style={{ fontSize: '13px', fontWeight: '500', color: '#fff', marginBottom: '2px' }}>{profile?.name}</div>
-          <div style={{ fontSize: '11px', opacity: 0.6, color: '#fff', marginBottom: '12px', textTransform: 'capitalize' }}>{profile?.role}</div>
+        <div style={{ padding: '1rem 1.5rem', borderTop: '1px solid rgba(212,168,83,0.2)' }}>
+          <div style={{ fontSize: '13px', fontWeight: '500', color: '#FAF7F2', marginBottom: '2px' }}>{profile?.name}</div>
+          <div style={{ fontSize: '11px', opacity: 0.7, color: '#8B6F6F', marginBottom: '12px', textTransform: 'capitalize' }}>{profile?.role}</div>
           {lang === 'fr' ? (
             <button onClick={toggleLang} style={{
               display: 'flex',
@@ -241,8 +241,8 @@ export default function Layout({ children }) {
               gap: '8px',
               padding: '6px 14px',
               borderRadius: '20px',
-              border: '1.5px solid rgba(255,255,255,0.25)',
-              background: 'rgba(255,255,255,0.08)',
+              border: '1.5px solid rgba(212,168,83,0.3)',
+              background: 'rgba(212,168,83,0.08)',
               cursor: 'pointer',
             }}>
               <img src="https://flagcdn.com/w20/fr.png"
@@ -262,8 +262,8 @@ export default function Layout({ children }) {
               gap: '8px',
               padding: '6px 14px',
               borderRadius: '20px',
-              border: '1.5px solid rgba(255,255,255,0.25)',
-              background: 'rgba(255,255,255,0.08)',
+              border: '1.5px solid rgba(212,168,83,0.3)',
+              background: 'rgba(212,168,83,0.08)',
               cursor: 'pointer',
             }}>
               <img src="https://flagcdn.com/w20/fr.png"
@@ -279,9 +279,9 @@ export default function Layout({ children }) {
           )}
           <button
             onClick={signOut}
-            style={{ width: '100%', padding: '8px', background: 'rgba(255,255,255,0.1)', color: '#fff', borderRadius: '6px', fontSize: '13px', cursor: 'pointer', border: 'none', marginTop: '8px' }}
-            onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.2)'}
-            onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.1)'}
+            style={{ width: '100%', padding: '8px', background: 'transparent', color: '#D4A853', borderRadius: '6px', fontSize: '13px', cursor: 'pointer', border: '1px solid #D4A853', marginTop: '8px' }}
+            onMouseEnter={e => e.currentTarget.style.background = 'rgba(212,168,83,0.15)'}
+            onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
           >
             {t(lang, 'logout')}
           </button>
@@ -296,7 +296,7 @@ export default function Layout({ children }) {
       <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', fontFamily: 'Inter, sans-serif' }}>
 
         {/* Top bar */}
-        <div style={{ background: '#1a5c3a', color: '#fff', padding: '0 1rem', height: '56px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0, zIndex: 100 }}>
+        <div style={{ background: '#6B2737', color: '#fff', padding: '0 1rem', height: '56px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0, zIndex: 100 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <div style={{ width: '30px', height: '30px', borderRadius: '6px', background: 'rgba(255,255,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <span style={{ fontSize: '16px', fontWeight: '700' }}>T</span>
@@ -330,8 +330,8 @@ export default function Layout({ children }) {
         {/* Mobile drawer */}
         <div style={{
           position: 'fixed', top: 0, left: 0, height: '100vh',
-          width: '280px', background: '#1a5c3a', zIndex: 1000,
-          display: 'flex', flexDirection: 'column', paddingTop: '1rem',
+          width: '280px', background: '#6B2737', zIndex: 1000,
+          display: 'flex', flexDirection: 'column', paddingTop: '1.5rem',
           transform: menuOpen ? 'translateX(0)' : 'translateX(-100%)',
           transition: 'transform 0.25s ease',
         }}>
@@ -339,7 +339,7 @@ export default function Layout({ children }) {
         </div>
 
         {/* Page content */}
-        <main style={{ flex: 1, background: '#f8f7f4', overflowY: 'auto' }}>
+        <main style={{ flex: 1, background: '#FAF7F2', overflowY: 'auto' }}>
           {children}
         </main>
 
@@ -361,8 +361,8 @@ export default function Layout({ children }) {
                   flex: 1, padding: '8px 4px', border: 'none', background: 'none',
                   cursor: 'pointer', display: 'flex', flexDirection: 'column',
                   alignItems: 'center', gap: '2px',
-                  color: isActive ? '#1a5c3a' : '#6b6b66',
-                  borderTop: isActive ? '2px solid #1a5c3a' : '2px solid transparent',
+                  color: isActive ? '#D4A853' : '#8B6F6F',
+                  borderTop: isActive ? '2px solid #D4A853' : '2px solid transparent',
                 }}
               >
                 <span style={{ fontSize: '18px' }}>{item.icon}</span>
@@ -378,10 +378,10 @@ export default function Layout({ children }) {
   // ── DESKTOP LAYOUT ─────────────────────────────────────────────────────────
   return (
     <div style={{ display: 'flex', height: '100vh', fontFamily: 'Inter, sans-serif' }}>
-      <aside style={{ width: '220px', background: '#1a5c3a', color: '#fff', display: 'flex', flexDirection: 'column', padding: '1.5rem 0', flexShrink: 0, overflowY: 'auto' }}>
+      <aside style={{ width: '220px', background: '#6B2737', color: '#fff', display: 'flex', flexDirection: 'column', padding: '1.5rem 0', flexShrink: 0, overflowY: 'auto' }}>
         <SidebarContent />
       </aside>
-      <main style={{ flex: 1, background: '#f8f7f4', overflowY: 'auto', display: 'flex', flexDirection: 'column' }}>
+      <main style={{ flex: 1, background: '#FAF7F2', overflowY: 'auto', display: 'flex', flexDirection: 'column' }}>
         {/* ✅ TRIAL + DEMO BANNER — desktop */}
         <TrialBanner profile={profile} navigate={navigate} />
         <DemoBanner />

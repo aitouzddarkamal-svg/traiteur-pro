@@ -8,62 +8,62 @@ import DateInput from '../components/DateInput';
    STYLES
 ═══════════════════════════════════════════════ */
 const styles = `
-  .facture-wrapper { padding: 24px; font-family: 'Segoe UI', sans-serif; background: #f8f9fc; min-height: 100vh; color: #1a1d2e; }
+  .facture-wrapper { padding: 24px; font-family: 'Segoe UI', sans-serif; background: #FAF7F2; min-height: 100vh; color: #2C1810; }
   .facture-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; flex-wrap: wrap; gap: 12px; }
-  .facture-title { font-size: 22px; font-weight: 700; color: #1a1d2e; display: flex; align-items: center; gap: 10px; }
-  .facture-title span.icon { width: 40px; height: 40px; background: linear-gradient(135deg, #7c3aed, #6d28d9); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; color: white; }
-  .facture-tabs { display: flex; gap: 4px; background: #e8eaf2; border-radius: 12px; padding: 4px; margin-bottom: 24px; overflow-x: auto; }
-  .facture-tab { flex: 1; min-width: 140px; padding: 10px 16px; border: none; background: transparent; border-radius: 9px; font-size: 13px; font-weight: 500; color: #6b7280; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 7px; white-space: nowrap; transition: all 0.2s; }
-  .facture-tab:hover { color: #7c3aed; background: #ede9fe; }
-  .facture-tab.active { background: #fff; color: #7c3aed; font-weight: 600; box-shadow: 0 1px 6px rgba(0,0,0,0.1); }
-  .panel { background: #fff; border-radius: 14px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); border: 1px solid #eef0f7; overflow: hidden; margin-bottom: 20px; }
-  .panel-head { display: flex; align-items: center; justify-content: space-between; padding: 18px 20px; border-bottom: 1px solid #f0f2f9; flex-wrap: wrap; gap: 10px; }
-  .panel-head h3 { font-size: 15px; font-weight: 600; color: #1a1d2e; margin: 0; display: flex; align-items: center; gap: 8px; }
+  .facture-title { font-size: 22px; font-weight: 700; color: #2C1810; display: flex; align-items: center; gap: 10px; }
+  .facture-title span.icon { width: 40px; height: 40px; background: linear-gradient(135deg, #6B2737, #5a1f2e); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; color: white; }
+  .facture-tabs { display: flex; gap: 4px; background: rgba(107,39,55,0.08); border-radius: 12px; padding: 4px; margin-bottom: 24px; overflow-x: auto; }
+  .facture-tab { flex: 1; min-width: 140px; padding: 10px 16px; border: none; background: transparent; border-radius: 9px; font-size: 13px; font-weight: 500; color: #8B6F6F; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 7px; white-space: nowrap; transition: all 0.2s; }
+  .facture-tab:hover { color: #6B2737; background: rgba(107,39,55,0.08); }
+  .facture-tab.active { background: #fff; color: #6B2737; font-weight: 600; box-shadow: 0 1px 6px rgba(0,0,0,0.1); }
+  .panel { background: #fff; border-radius: 14px; box-shadow: 0 1px 4px rgba(107,39,55,0.06); border: 1px solid #e8ddd0; overflow: hidden; margin-bottom: 20px; }
+  .panel-head { display: flex; align-items: center; justify-content: space-between; padding: 18px 20px; border-bottom: 1px solid #e8ddd0; flex-wrap: wrap; gap: 10px; }
+  .panel-head h3 { font-size: 15px; font-weight: 600; color: #2C1810; margin: 0; display: flex; align-items: center; gap: 8px; }
   .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; padding: 20px; }
-  .form-grid.tight { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; padding: 16px 20px; background: #fafbff; border-bottom: 1px solid #f0f2f9; }
+  .form-grid.tight { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; padding: 16px 20px; background: #FAF7F2; border-bottom: 1px solid #e8ddd0; }
   .form-field { display: flex; flex-direction: column; gap: 6px; }
   .form-field.full { grid-column: 1 / -1; }
-  .form-field label { font-size: 12px; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px; }
-  .form-field input, .form-field select, .form-field textarea { padding: 10px 14px; border: 1.5px solid #e5e7eb; border-radius: 10px; font-size: 14px; color: #1a1d2e; background: #fff; transition: border-color 0.2s; outline: none; font-family: inherit; }
-  .form-field input:focus, .form-field select:focus, .form-field textarea:focus { border-color: #7c3aed; box-shadow: 0 0 0 3px rgba(124,58,237,0.08); }
+  .form-field label { font-size: 12px; font-weight: 700; color: #8B6F6F; text-transform: uppercase; letter-spacing: 0.5px; }
+  .form-field input, .form-field select, .form-field textarea { padding: 10px 14px; border: 1.5px solid #e8ddd0; border-radius: 10px; font-size: 14px; color: #2C1810; background: #fff; transition: border-color 0.2s; outline: none; font-family: inherit; }
+  .form-field input:focus, .form-field select:focus, .form-field textarea:focus { border-color: #D4A853; box-shadow: 0 0 0 3px rgba(212,168,83,0.12); }
   .form-field textarea { resize: vertical; min-height: 80px; }
   .btn { padding: 9px 18px; border-radius: 9px; border: none; font-size: 13px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s; white-space: nowrap; }
-  .btn-purple { background: #7c3aed; color: #fff; }
-  .btn-purple:hover { background: #6d28d9; transform: translateY(-1px); }
-  .btn-green { background: #10b981; color: #fff; }
-  .btn-green:hover { background: #059669; }
+  .btn-purple { background: #6B2737; color: #FAF7F2; }
+  .btn-purple:hover { background: #5a1f2e; transform: translateY(-1px); }
+  .btn-green { background: #22c55e; color: #fff; }
+  .btn-green:hover { background: #16a34a; }
   .btn-blue { background: #2563eb; color: #fff; }
   .btn-blue:hover { background: #1d4ed8; }
   .btn-danger { background: #fef2f2; color: #ef4444; border: 1.5px solid #fecaca; }
   .btn-danger:hover { background: #ef4444; color: #fff; }
-  .btn-ghost { background: #f3f4f6; color: #374151; }
-  .btn-ghost:hover { background: #e5e7eb; }
-  .btn-outline { background: #fff; color: #7c3aed; border: 1.5px solid #7c3aed; }
-  .btn-outline:hover { background: #f5f3ff; }
+  .btn-ghost { background: #f5ede0; color: #2C1810; }
+  .btn-ghost:hover { background: #e8ddd0; }
+  .btn-outline { background: #fff; color: #6B2737; border: 1.5px solid #6B2737; }
+  .btn-outline:hover { background: rgba(107,39,55,0.05); }
   .btn-sm { padding: 6px 12px; font-size: 12px; }
   .badge { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; white-space: nowrap; }
-  .badge-draft    { background: #f3f4f6; color: #6b7280; }
+  .badge-draft    { background: #f5ede0; color: #8B6F6F; }
   .badge-sent     { background: #dbeafe; color: #2563eb; }
   .badge-paid     { background: #d1fae5; color: #059669; }
   .badge-overdue  { background: #fee2e2; color: #dc2626; }
-  .badge-cancelled{ background: #f3f4f6; color: #9ca3af; }
-  .badge-purple   { background: #ede9fe; color: #7c3aed; }
+  .badge-cancelled{ background: #f5ede0; color: #8B6F6F; }
+  .badge-purple   { background: rgba(107,39,55,0.08); color: #6B2737; }
   .facture-table-wrap { overflow-x: auto; }
   .facture-table { width: 100%; border-collapse: collapse; font-size: 14px; }
-  .facture-table thead th { background: #f8f9fc; padding: 11px 16px; text-align: left; font-size: 11px; font-weight: 700; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.6px; border-bottom: 1px solid #f0f2f9; white-space: nowrap; }
-  .facture-table tbody tr { border-bottom: 1px solid #f5f7ff; transition: background 0.15s; }
-  .facture-table tbody tr:hover { background: #f8f9fc; }
-  .facture-table tbody td { padding: 12px 16px; color: #374151; vertical-align: middle; }
-  .empty-state { text-align: center; padding: 48px 20px; color: #9ca3af; font-size: 14px; }
+  .facture-table thead th { background: #FAF7F2; padding: 11px 16px; text-align: left; font-size: 11px; font-weight: 700; color: #8B6F6F; text-transform: uppercase; letter-spacing: 0.6px; border-bottom: 1px solid #e8ddd0; white-space: nowrap; }
+  .facture-table tbody tr { border-bottom: 1px solid #f0ebe3; transition: background 0.15s; }
+  .facture-table tbody tr:hover { background: #f5ede0; }
+  .facture-table tbody td { padding: 12px 16px; color: #2C1810; vertical-align: middle; }
+  .empty-state { text-align: center; padding: 48px 20px; color: #8B6F6F; font-size: 14px; }
   .empty-state .empty-icon { font-size: 40px; margin-bottom: 12px; }
   .items-table { width: 100%; border-collapse: collapse; margin-bottom: 12px; }
-  .items-table th { background: #f8f9fc; padding: 9px 12px; text-align: left; font-size: 12px; font-weight: 700; color: #9ca3af; text-transform: uppercase; border-bottom: 1px solid #f0f2f9; }
-  .items-table td { padding: 8px 12px; border-bottom: 1px solid #f5f7ff; vertical-align: middle; }
-  .items-table input { padding: 7px 10px; border: 1.5px solid #e5e7eb; border-radius: 7px; font-size: 13px; width: 100%; font-family: inherit; outline: none; }
-  .items-table input:focus { border-color: #7c3aed; }
+  .items-table th { background: #FAF7F2; padding: 9px 12px; text-align: left; font-size: 12px; font-weight: 700; color: #8B6F6F; text-transform: uppercase; border-bottom: 1px solid #e8ddd0; }
+  .items-table td { padding: 8px 12px; border-bottom: 1px solid #f0ebe3; vertical-align: middle; }
+  .items-table input { padding: 7px 10px; border: 1.5px solid #e8ddd0; border-radius: 7px; font-size: 13px; width: 100%; font-family: inherit; outline: none; }
+  .items-table input:focus { border-color: #D4A853; }
   .totals-box { margin-left: auto; width: 280px; }
-  .total-line { display: flex; justify-content: space-between; padding: 6px 0; font-size: 14px; color: #374151; border-bottom: 1px solid #f0f2f9; }
-  .total-line.grand { font-size: 16px; font-weight: 800; color: #1a1d2e; border-bottom: none; padding-top: 10px; }
+  .total-line { display: flex; justify-content: space-between; padding: 6px 0; font-size: 14px; color: #2C1810; border-bottom: 1px solid #e8ddd0; }
+  .total-line.grand { font-size: 16px; font-weight: 800; color: #2C1810; border-bottom: none; padding-top: 10px; }
   .status-actions { display: flex; gap: 6px; flex-wrap: wrap; }
 
   /* ── PRINT PDF STYLES ── */
@@ -76,11 +76,11 @@ const styles = `
 
   /* ── INVOICE PREVIEW ── */
   .invoice-preview {
-    background: #fff; border-radius: 14px; border: 1px solid #eef0f7;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.06); overflow: hidden; margin-bottom: 20px;
+    background: #fff; border-radius: 14px; border: 1px solid #e8ddd0;
+    box-shadow: 0 1px 4px rgba(107,39,55,0.06); overflow: hidden; margin-bottom: 20px;
   }
   .inv-header {
-    background: linear-gradient(135deg, #7c3aed, #6d28d9);
+    background: linear-gradient(135deg, #6B2737, #5a1f2e);
     padding: 32px; color: white; display: flex;
     justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 20px;
   }
@@ -91,28 +91,28 @@ const styles = `
   .inv-number { font-size: 26px; font-weight: 800; }
   .inv-body { padding: 32px; }
   .inv-parties { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 32px; }
-  .inv-party h4 { font-size: 11px; font-weight: 700; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.8px; margin: 0 0 10px 0; }
-  .inv-party p { font-size: 14px; color: #374151; margin: 3px 0; }
-  .inv-party .name { font-size: 16px; font-weight: 700; color: #1a1d2e; }
+  .inv-party h4 { font-size: 11px; font-weight: 700; color: #8B6F6F; text-transform: uppercase; letter-spacing: 0.8px; margin: 0 0 10px 0; }
+  .inv-party p { font-size: 14px; color: #2C1810; margin: 3px 0; }
+  .inv-party .name { font-size: 16px; font-weight: 700; color: #2C1810; }
   .inv-dates { display: flex; gap: 24px; margin-bottom: 28px; flex-wrap: wrap; }
-  .inv-date-item { background: #f8f9fc; padding: 10px 16px; border-radius: 10px; }
-  .inv-date-label { font-size: 11px; color: #9ca3af; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
-  .inv-date-value { font-size: 14px; font-weight: 700; color: #1a1d2e; margin-top: 2px; }
+  .inv-date-item { background: #FAF7F2; padding: 10px 16px; border-radius: 10px; }
+  .inv-date-label { font-size: 11px; color: #8B6F6F; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  .inv-date-value { font-size: 14px; font-weight: 700; color: #2C1810; margin-top: 2px; }
   .inv-items-table { width: 100%; border-collapse: collapse; margin-bottom: 24px; }
-  .inv-items-table thead th { background: #f8f9fc; padding: 12px 16px; text-align: left; font-size: 12px; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid #e5e7eb; }
+  .inv-items-table thead th { background: #FAF7F2; padding: 12px 16px; text-align: left; font-size: 12px; font-weight: 700; color: #8B6F6F; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid #e8ddd0; }
   .inv-items-table thead th:last-child { text-align: right; }
-  .inv-items-table tbody td { padding: 12px 16px; border-bottom: 1px solid #f0f2f9; font-size: 14px; color: #374151; }
+  .inv-items-table tbody td { padding: 12px 16px; border-bottom: 1px solid #f0ebe3; font-size: 14px; color: #2C1810; }
   .inv-items-table tbody td:last-child { text-align: right; font-weight: 600; }
   .inv-items-table tbody tr:last-child td { border-bottom: none; }
   .inv-totals { display: flex; justify-content: flex-end; margin-bottom: 28px; }
   .inv-totals-box { min-width: 260px; }
-  .inv-total-line { display: flex; justify-content: space-between; padding: 8px 0; font-size: 14px; color: #374151; border-bottom: 1px solid #f0f2f9; }
-  .inv-total-line.grand { font-size: 18px; font-weight: 800; color: #1a1d2e; border-bottom: none; border-top: 2px solid #7c3aed; margin-top: 4px; padding-top: 12px; }
-  .inv-footer { background: #f8f9fc; padding: 20px 32px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; border-top: 1px solid #e5e7eb; }
-  .inv-footer p { font-size: 12px; color: #9ca3af; margin: 0; }
+  .inv-total-line { display: flex; justify-content: space-between; padding: 8px 0; font-size: 14px; color: #2C1810; border-bottom: 1px solid #e8ddd0; }
+  .inv-total-line.grand { font-size: 18px; font-weight: 800; color: #2C1810; border-bottom: none; border-top: 2px solid #D4A853; margin-top: 4px; padding-top: 12px; }
+  .inv-footer { background: #FAF7F2; padding: 20px 32px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; border-top: 1px solid #e8ddd0; }
+  .inv-footer p { font-size: 12px; color: #8B6F6F; margin: 0; }
   .inv-status-stamp { font-size: 28px; font-weight: 900; text-transform: uppercase; letter-spacing: 3px; opacity: 0.15; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-30deg); pointer-events: none; }
   .inv-body-wrap { position: relative; }
-  .inv-notes { background: #fffbeb; border-left: 4px solid #f59e0b; padding: 14px 18px; border-radius: 0 10px 10px 0; margin-bottom: 24px; font-size: 13px; color: #92400e; }
+  .inv-notes { background: #fffbeb; border-left: 4px solid #D4A853; padding: 14px 18px; border-radius: 0 10px 10px 0; margin-bottom: 24px; font-size: 13px; color: #6B2737; }
 
   @media (max-width: 640px) {
     .facture-wrapper { padding: 14px; }
@@ -248,7 +248,7 @@ function InvoicePreview({ invoice, items, bizName, bizPhone, bizEmail, bizAddres
               )}
               <div className="inv-total-line grand">
                 <span>Total TTC</span>
-                <span style={{ color: '#7c3aed' }}>{fmt(total)}</span>
+                <span style={{ color: '#D4A853' }}>{fmt(total)}</span>
               </div>
             </div>
           </div>
@@ -265,7 +265,7 @@ function InvoicePreview({ invoice, items, bizName, bizPhone, bizEmail, bizAddres
       {/* Footer */}
       <div className="inv-footer">
         <p>Merci pour votre confiance !</p>
-        <p style={{ color: '#7c3aed', fontWeight: 600 }}>Traiteur Pro — Gestion professionnelle</p>
+        <p style={{ color: '#D4A853', fontWeight: 600 }}>Traiteur Pro — Gestion professionnelle</p>
       </div>
     </div>
   );
@@ -528,8 +528,8 @@ export default function Facture() {
     const n2 = (n) => Number(n || 0).toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     let y = 0;
 
-    // Purple header band
-    doc.setFillColor(124, 58, 237);
+    // Burgundy header band
+    doc.setFillColor(107, 39, 55);
     doc.rect(0, 0, W, 38, 'F');
     doc.setTextColor(255, 255, 255);
     doc.setFontSize(18);
@@ -640,7 +640,7 @@ export default function Facture() {
       doc.text(`${n2(taxAmtPDF)} MAD`, W - ml - 2, y, { align: 'right' });
       y += 7;
     }
-    doc.setFillColor(124, 58, 237);
+    doc.setFillColor(212, 168, 83);
     doc.rect(totX - 3, y - 4, W - ml - totX + 5, 10, 'F');
     doc.setTextColor(255, 255, 255);
     doc.setFontSize(10);
@@ -711,16 +711,16 @@ export default function Facture() {
             {/* KPIs */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px,1fr))', gap: 16, marginBottom: 24 }}>
               {[
-                { label: '📋 Total factures', value: stats.total,   sub: 'Émises',       color: '#7c3aed', bg: 'purple' },
-                { label: '✅ Payées',          value: stats.paid,    sub: 'Réglées',      color: '#10b981', bg: 'green'  },
+                { label: '📋 Total factures', value: stats.total,   sub: 'Émises',       color: '#6B2737', bg: 'burg'   },
+                { label: '✅ Payées',          value: stats.paid,    sub: 'Réglées',      color: '#22c55e', bg: 'green'  },
                 { label: '📤 Envoyées',        value: stats.pending, sub: 'En attente',   color: '#2563eb', bg: 'blue'   },
                 { label: '⚠️ En retard',       value: stats.overdue, sub: 'À relancer',   color: '#ef4444', bg: 'red'    },
-                { label: '💰 Chiffre d\'affaires', value: null, extra: new Intl.NumberFormat('fr-MA', { style: 'currency', currency: 'MAD', maximumFractionDigits: 0 }).format(stats.revenue), sub: 'Factures payées', color: '#10b981', bg: 'green' },
+                { label: '💰 Chiffre d\'affaires', value: null, extra: new Intl.NumberFormat('fr-MA', { style: 'currency', currency: 'MAD', maximumFractionDigits: 0 }).format(stats.revenue), sub: 'Factures payées', color: '#D4A853', bg: 'gold' },
               ].map(k => (
-                <div key={k.label} style={{ background: '#fff', borderRadius: 14, padding: 20, boxShadow: '0 1px 4px rgba(0,0,0,0.06)', border: '1px solid #eef0f7', borderLeft: `4px solid ${k.color}` }}>
-                  <div style={{ fontSize: 11, color: '#9ca3af', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.6px', marginBottom: 8 }}>{k.label}</div>
+                <div key={k.label} style={{ background: '#fff', borderRadius: 14, padding: 20, boxShadow: '0 1px 4px rgba(107,39,55,0.06)', border: '1px solid #e8ddd0', borderLeft: `4px solid ${k.color}` }}>
+                  <div style={{ fontSize: 11, color: '#8B6F6F', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.6px', marginBottom: 8 }}>{k.label}</div>
                   <div style={{ fontSize: 22, fontWeight: 700, color: k.color }}>{k.extra || k.value}</div>
-                  <div style={{ fontSize: 12, color: '#6b7280', marginTop: 4 }}>{k.sub}</div>
+                  <div style={{ fontSize: 12, color: '#8B6F6F', marginTop: 4 }}>{k.sub}</div>
                 </div>
               ))}
             </div>
@@ -767,7 +767,7 @@ export default function Facture() {
                       const sc = STATUS_CONFIG[inv.status] || STATUS_CONFIG.draft;
                       return (
                         <tr key={inv.id}>
-                          <td style={{ fontWeight: 700, color: '#7c3aed' }}>#{inv.invoice_number}</td>
+                          <td style={{ fontWeight: 700, color: '#6B2737' }}>#{inv.invoice_number}</td>
                           <td style={{ fontWeight: 600 }}>{inv.client_name}</td>
                           <td>{fmtDate(inv.issue_date)}</td>
                           <td style={{ color: inv.status === 'overdue' ? '#ef4444' : '#374151' }}>{fmtDate(inv.due_date)}</td>
@@ -797,9 +797,9 @@ export default function Facture() {
                               <button
                                 onClick={() => handleShareInvoice(inv)}
                                 style={{
-                                  background: '#f0fdf4',
-                                  color: '#16a34a',
-                                  border: '1px solid #86efac',
+                                  background: 'rgba(212,168,83,0.1)',
+                                  color: '#6B2737',
+                                  border: '1px solid rgba(212,168,83,0.4)',
                                   borderRadius: 6,
                                   padding: '5px 12px',
                                   cursor: 'pointer',
@@ -812,7 +812,7 @@ export default function Facture() {
                                 <button
                                   title="Télécharger PDF"
                                   onClick={() => handleDownloadPDF(inv)}
-                                  style={{ background: '#7c3aed', color: '#fff', border: 'none', borderRadius: 6, padding: '5px 12px', cursor: 'pointer', fontSize: 13 }}
+                                  style={{ background: '#6B2737', color: '#FAF7F2', border: 'none', borderRadius: 6, padding: '5px 12px', cursor: 'pointer', fontSize: 13 }}
                                 >
                                   📄 PDF
                                 </button>
@@ -953,7 +953,7 @@ export default function Facture() {
                       <div className="totals-box">
                         <div className="total-line"><span>Sous-total HT</span><span>{fmt(subtotal)}</span></div>
                         {form.tax_rate > 0 && <div className="total-line"><span>TVA ({form.tax_rate}%)</span><span>{fmt(taxAmount)}</span></div>}
-                        <div className="total-line grand"><span>Total TTC</span><span style={{ color: '#7c3aed' }}>{fmt(total)}</span></div>
+                        <div className="total-line grand"><span>Total TTC</span><span style={{ color: '#D4A853' }}>{fmt(total)}</span></div>
                       </div>
                     </div>
                   </div>
@@ -986,14 +986,14 @@ export default function Facture() {
       {paymentModal && (
         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2000 }}>
           <div style={{ background: '#fff', borderRadius: 14, padding: '2rem', width: 440, boxShadow: '0 20px 60px rgba(0,0,0,0.2)' }}>
-            <h3 style={{ fontSize: 17, fontWeight: 700, color: '#1a1d2e', marginBottom: 20 }}>💳 Enregistrer le paiement reçu</h3>
+            <h3 style={{ fontSize: 17, fontWeight: 700, color: '#2C1810', marginBottom: 20 }}>💳 Enregistrer le paiement reçu</h3>
 
             <div style={{ marginBottom: 16 }}>
-              <label style={{ display: 'block', fontSize: 12, fontWeight: 700, color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: 6 }}>Méthode</label>
+              <label style={{ display: 'block', fontSize: 12, fontWeight: 700, color: '#8B6F6F', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: 6 }}>Méthode</label>
               <select
                 value={paymentForm.method}
                 onChange={e => setPaymentForm(f => ({ ...f, method: e.target.value }))}
-                style={{ width: '100%', padding: '10px 14px', border: '1.5px solid #e5e7eb', borderRadius: 10, fontSize: 14, color: '#1a1d2e', background: '#fff', outline: 'none' }}
+                style={{ width: '100%', padding: '10px 14px', border: '1.5px solid #e8ddd0', borderRadius: 10, fontSize: 14, color: '#2C1810', background: '#fff', outline: 'none' }}
               >
                 <option value="cash">Espèces</option>
                 <option value="cheque">Chèque</option>
@@ -1002,47 +1002,47 @@ export default function Facture() {
             </div>
 
             <div style={{ marginBottom: 16 }}>
-              <label style={{ display: 'block', fontSize: 12, fontWeight: 700, color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: 6 }}>Référence</label>
+              <label style={{ display: 'block', fontSize: 12, fontWeight: 700, color: '#8B6F6F', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: 6 }}>Référence</label>
               <input
                 type="text"
                 placeholder="N° chèque, référence virement..."
                 value={paymentForm.reference}
                 onChange={e => setPaymentForm(f => ({ ...f, reference: e.target.value }))}
-                style={{ width: '100%', padding: '10px 14px', border: '1.5px solid #e5e7eb', borderRadius: 10, fontSize: 14, color: '#1a1d2e', background: '#fff', outline: 'none', boxSizing: 'border-box' }}
+                style={{ width: '100%', padding: '10px 14px', border: '1.5px solid #e8ddd0', borderRadius: 10, fontSize: 14, color: '#2C1810', background: '#fff', outline: 'none', boxSizing: 'border-box' }}
               />
             </div>
 
             <div style={{ marginBottom: 16 }}>
-              <label style={{ display: 'block', fontSize: 12, fontWeight: 700, color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: 6 }}>Date</label>
+              <label style={{ display: 'block', fontSize: 12, fontWeight: 700, color: '#8B6F6F', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: 6 }}>Date</label>
               <input
                 type="date"
                 value={paymentForm.date}
                 onChange={e => setPaymentForm(f => ({ ...f, date: e.target.value }))}
-                style={{ width: '100%', padding: '10px 14px', border: '1.5px solid #e5e7eb', borderRadius: 10, fontSize: 14, color: '#1a1d2e', background: '#fff', outline: 'none', boxSizing: 'border-box' }}
+                style={{ width: '100%', padding: '10px 14px', border: '1.5px solid #e8ddd0', borderRadius: 10, fontSize: 14, color: '#2C1810', background: '#fff', outline: 'none', boxSizing: 'border-box' }}
               />
             </div>
 
             <div style={{ marginBottom: 24 }}>
-              <label style={{ display: 'block', fontSize: 12, fontWeight: 700, color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: 6 }}>Montant</label>
+              <label style={{ display: 'block', fontSize: 12, fontWeight: 700, color: '#8B6F6F', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: 6 }}>Montant</label>
               <input
                 type="number"
                 value={paymentModal.total}
                 readOnly
-                style={{ width: '100%', padding: '10px 14px', border: '1.5px solid #e5e7eb', borderRadius: 10, fontSize: 14, color: '#6b7280', background: '#f9fafb', outline: 'none', boxSizing: 'border-box' }}
+                style={{ width: '100%', padding: '10px 14px', border: '1.5px solid #e8ddd0', borderRadius: 10, fontSize: 14, color: '#8B6F6F', background: '#FAF7F2', outline: 'none', boxSizing: 'border-box' }}
               />
             </div>
 
             <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end' }}>
               <button
                 onClick={() => setPaymentModal(null)}
-                style={{ padding: '10px 20px', borderRadius: 9, border: '1.5px solid #e5e7eb', background: '#fff', color: '#374151', fontSize: 14, fontWeight: 500, cursor: 'pointer' }}
+                style={{ padding: '10px 20px', borderRadius: 9, border: '1.5px solid #e8ddd0', background: '#fff', color: '#2C1810', fontSize: 14, fontWeight: 500, cursor: 'pointer' }}
               >
                 Annuler
               </button>
               <button
                 onClick={handleConfirmPayment}
                 disabled={paymentSaving}
-                style={{ padding: '10px 20px', borderRadius: 9, border: 'none', background: '#10b981', color: '#fff', fontSize: 14, fontWeight: 600, cursor: 'pointer', opacity: paymentSaving ? 0.7 : 1 }}
+                style={{ padding: '10px 20px', borderRadius: 9, border: 'none', background: '#22c55e', color: '#fff', fontSize: 14, fontWeight: 600, cursor: 'pointer', opacity: paymentSaving ? 0.7 : 1 }}
               >
                 {paymentSaving ? 'Enregistrement...' : '✅ Confirmer le paiement'}
               </button>

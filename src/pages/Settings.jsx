@@ -10,9 +10,9 @@ const styles = `
   .settings-wrapper {
     padding: 24px;
     font-family: 'Segoe UI', sans-serif;
-    background: #f8f9fc;
+    background: #FAF7F2;
     min-height: 100vh;
-    color: #1a1d2e;
+    color: #2C1810;
   }
   .settings-header {
     display: flex; align-items: center;
@@ -20,52 +20,52 @@ const styles = `
     margin-bottom: 28px; flex-wrap: wrap; gap: 12px;
   }
   .settings-title {
-    font-size: 22px; font-weight: 700; color: #1a1d2e;
+    font-size: 22px; font-weight: 700; color: #2C1810;
     display: flex; align-items: center; gap: 10px;
   }
   .settings-title .icon {
     width: 40px; height: 40px;
-    background: linear-gradient(135deg, #6366f1, #4f46e5);
+    background: linear-gradient(135deg, #6B2737, #5a1f2e);
     border-radius: 10px; display: flex; align-items: center;
     justify-content: center; font-size: 18px; color: white;
   }
 
   /* TABS */
   .settings-tabs {
-    display: flex; gap: 4px; background: #e8eaf2;
+    display: flex; gap: 4px; background: rgba(107,39,55,0.08);
     border-radius: 12px; padding: 4px;
     margin-bottom: 28px; overflow-x: auto;
   }
   .settings-tab {
     flex: 1; min-width: 140px; padding: 10px 16px;
     border: none; background: transparent; border-radius: 9px;
-    font-size: 13px; font-weight: 500; color: #6b7280;
+    font-size: 13px; font-weight: 500; color: #8B6F6F;
     cursor: pointer; display: flex; align-items: center;
     justify-content: center; gap: 7px;
     white-space: nowrap; transition: all 0.2s;
   }
-  .settings-tab:hover { color: #6366f1; background: #e0e7ff; }
+  .settings-tab:hover { color: #6B2737; background: rgba(107,39,55,0.08); }
   .settings-tab.active {
-    background: #fff; color: #6366f1; font-weight: 600;
+    background: #fff; color: #6B2737; font-weight: 600;
     box-shadow: 0 1px 6px rgba(0,0,0,0.1);
   }
 
   /* CARDS */
   .settings-card {
     background: #fff; border-radius: 14px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-    border: 1px solid #eef0f7; overflow: hidden; margin-bottom: 20px;
+    box-shadow: 0 1px 4px rgba(107,39,55,0.06);
+    border: 1px solid #e8ddd0; overflow: hidden; margin-bottom: 20px;
   }
   .card-head {
     display: flex; align-items: center; justify-content: space-between;
-    padding: 18px 24px; border-bottom: 1px solid #f0f2f9;
+    padding: 18px 24px; border-bottom: 1px solid #e8ddd0;
     flex-wrap: wrap; gap: 10px;
   }
   .card-head h3 {
-    font-size: 15px; font-weight: 600; color: #1a1d2e;
+    font-size: 15px; font-weight: 600; color: #2C1810;
     margin: 0; display: flex; align-items: center; gap: 8px;
   }
-  .card-head p { font-size: 13px; color: #9ca3af; margin: 4px 0 0 0; }
+  .card-head p { font-size: 13px; color: #8B6F6F; margin: 4px 0 0 0; }
   .card-body { padding: 24px; }
 
   /* FORM */
@@ -76,20 +76,20 @@ const styles = `
   }
   .form-field { display: flex; flex-direction: column; gap: 6px; }
   .form-field label {
-    font-size: 12px; font-weight: 700; color: #6b7280;
+    font-size: 12px; font-weight: 700; color: #8B6F6F;
     text-transform: uppercase; letter-spacing: 0.5px;
   }
   .form-field input, .form-field select, .form-field textarea {
-    padding: 10px 14px; border: 1.5px solid #e5e7eb;
-    border-radius: 10px; font-size: 14px; color: #1a1d2e;
+    padding: 10px 14px; border: 1.5px solid #e8ddd0;
+    border-radius: 10px; font-size: 14px; color: #2C1810;
     background: #fff; transition: border-color 0.2s;
     outline: none; font-family: inherit;
   }
   .form-field input:focus, .form-field select:focus, .form-field textarea:focus {
-    border-color: #6366f1; box-shadow: 0 0 0 3px rgba(99,102,241,0.1);
+    border-color: #D4A853; box-shadow: 0 0 0 3px rgba(212,168,83,0.12);
   }
   .form-field textarea { resize: vertical; min-height: 90px; }
-  .form-hint { font-size: 11px; color: #9ca3af; margin-top: 2px; }
+  .form-hint { font-size: 11px; color: #8B6F6F; margin-top: 2px; }
   .form-full { grid-column: 1 / -1; }
 
   /* BUTTONS */
@@ -99,40 +99,40 @@ const styles = `
     display: inline-flex; align-items: center; gap: 7px;
     transition: all 0.2s; white-space: nowrap;
   }
-  .btn-primary { background: #6366f1; color: #fff; }
-  .btn-primary:hover { background: #4f46e5; transform: translateY(-1px); }
-  .btn-success { background: #10b981; color: #fff; }
-  .btn-success:hover { background: #059669; }
+  .btn-primary { background: #6B2737; color: #FAF7F2; }
+  .btn-primary:hover { background: #5a1f2e; transform: translateY(-1px); }
+  .btn-success { background: #22c55e; color: #fff; }
+  .btn-success:hover { background: #16a34a; }
   .btn-danger { background: #fef2f2; color: #ef4444; border: 1.5px solid #fecaca; }
   .btn-danger:hover { background: #ef4444; color: #fff; }
-  .btn-ghost { background: #f3f4f6; color: #374151; }
-  .btn-ghost:hover { background: #e5e7eb; }
-  .btn-outline { background: #fff; color: #6366f1; border: 1.5px solid #6366f1; }
-  .btn-outline:hover { background: #eef2ff; }
+  .btn-ghost { background: #f5ede0; color: #2C1810; }
+  .btn-ghost:hover { background: #e8ddd0; }
+  .btn-outline { background: #fff; color: #6B2737; border: 1.5px solid #6B2737; }
+  .btn-outline:hover { background: rgba(107,39,55,0.05); }
   .btn-sm { padding: 7px 14px; font-size: 12px; }
 
   /* REMINDER RULES */
   .rule-list { display: flex; flex-direction: column; gap: 12px; }
   .rule-card {
-    border: 1.5px solid #e5e7eb; border-radius: 12px;
-    padding: 16px 20px; background: #fafbff;
+    border: 1.5px solid #e8ddd0; border-radius: 12px;
+    padding: 16px 20px; background: #FAF7F2;
     transition: border-color 0.15s, box-shadow 0.15s;
     position: relative;
   }
-  .rule-card:hover { border-color: #6366f1; box-shadow: 0 2px 12px rgba(99,102,241,0.08); }
+  .rule-card:hover { border-color: #D4A853; box-shadow: 0 2px 12px rgba(212,168,83,0.1); }
   .rule-card.inactive { opacity: 0.55; }
   .rule-card-header {
     display: flex; align-items: flex-start;
     justify-content: space-between; gap: 12px; margin-bottom: 10px;
   }
   .rule-card-title {
-    font-size: 14px; font-weight: 600; color: #1a1d2e;
+    font-size: 14px; font-weight: 600; color: #2C1810;
     display: flex; align-items: center; gap: 8px;
   }
   .rule-card-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
   .rule-card-body {
-    font-size: 13px; color: #6b7280; line-height: 1.6;
-    background: #f0f2ff; border-radius: 8px; padding: 10px 12px;
+    font-size: 13px; color: #8B6F6F; line-height: 1.6;
+    background: rgba(212,168,83,0.07); border-radius: 8px; padding: 10px 12px;
     font-style: italic;
   }
   .rule-card-actions { display: flex; gap: 8px; align-items: center; }
@@ -151,7 +151,7 @@ const styles = `
     width: 16px; height: 16px; left: 3px; bottom: 3px;
     background: white; border-radius: 50%; transition: transform 0.2s;
   }
-  input:checked + .toggle-slider { background: #10b981; }
+  input:checked + .toggle-slider { background: #22c55e; }
   input:checked + .toggle-slider:before { transform: translateX(18px); }
 
   /* BADGE */
@@ -160,46 +160,46 @@ const styles = `
     padding: 3px 10px; border-radius: 20px;
     font-size: 11px; font-weight: 600;
   }
-  .badge-purple { background: #ede9fe; color: #7c3aed; }
+  .badge-purple { background: rgba(107,39,55,0.08); color: #6B2737; }
   .badge-green  { background: #d1fae5; color: #059669; }
   .badge-blue   { background: #dbeafe; color: #2563eb; }
   .badge-orange { background: #fef3c7; color: #d97706; }
-  .badge-gray   { background: #f3f4f6; color: #6b7280; }
+  .badge-gray   { background: #f5ede0; color: #8B6F6F; }
   .badge-red    { background: #fee2e2; color: #dc2626; }
 
   /* VARIABLES HINT */
   .vars-box {
-    background: #fafbff; border: 1.5px solid #e0e7ff;
+    background: #FAF7F2; border: 1.5px solid #e8ddd0;
     border-radius: 10px; padding: 14px 16px; margin-top: 12px;
   }
-  .vars-box p { font-size: 12px; font-weight: 700; color: #6366f1; margin: 0 0 8px 0; }
+  .vars-box p { font-size: 12px; font-weight: 700; color: #6B2737; margin: 0 0 8px 0; }
   .vars-list { display: flex; flex-wrap: wrap; gap: 6px; }
   .var-chip {
-    background: #e0e7ff; color: #4f46e5; border-radius: 6px;
+    background: rgba(212,168,83,0.15); color: #6B2737; border-radius: 6px;
     padding: 3px 8px; font-size: 11px; font-weight: 600;
     font-family: monospace; cursor: pointer; transition: background 0.15s;
   }
-  .var-chip:hover { background: #c7d2fe; }
+  .var-chip:hover { background: rgba(212,168,83,0.3); }
 
   /* SECTION DIVIDER */
   .section-label {
-    font-size: 11px; font-weight: 700; color: #9ca3af;
+    font-size: 11px; font-weight: 700; color: #8B6F6F;
     text-transform: uppercase; letter-spacing: 0.8px;
     margin: 0 0 14px 0; display: flex; align-items: center; gap: 8px;
   }
   .section-label::after {
-    content: ''; flex: 1; height: 1px; background: #f0f2f9;
+    content: ''; flex: 1; height: 1px; background: #e8ddd0;
   }
 
   /* SAVE BAR */
   .save-bar {
     position: sticky; bottom: 0; left: 0; right: 0;
     background: rgba(255,255,255,0.95); backdrop-filter: blur(8px);
-    border-top: 1px solid #e5e7eb; padding: 14px 24px;
+    border-top: 1px solid #e8ddd0; padding: 14px 24px;
     display: flex; align-items: center; justify-content: space-between;
     gap: 12px; z-index: 10; border-radius: 0 0 14px 14px;
   }
-  .save-bar-hint { font-size: 12px; color: #9ca3af; }
+  .save-bar-hint { font-size: 12px; color: #8B6F6F; }
 
   /* CURRENCY GRID */
   .currency-grid {
@@ -207,15 +207,15 @@ const styles = `
     gap: 10px;
   }
   .currency-opt {
-    border: 1.5px solid #e5e7eb; border-radius: 10px;
+    border: 1.5px solid #e8ddd0; border-radius: 10px;
     padding: 12px; cursor: pointer; text-align: center;
     transition: all 0.15s; background: #fff;
   }
-  .currency-opt:hover { border-color: #6366f1; background: #fafbff; }
-  .currency-opt.selected { border-color: #6366f1; background: #eef2ff; }
-  .currency-opt .symbol { font-size: 22px; font-weight: 700; color: #1a1d2e; }
-  .currency-opt .name { font-size: 11px; color: #9ca3af; margin-top: 2px; }
-  .currency-opt .code { font-size: 12px; font-weight: 600; color: #6366f1; }
+  .currency-opt:hover { border-color: #D4A853; background: #FAF7F2; }
+  .currency-opt.selected { border-color: #D4A853; background: rgba(212,168,83,0.1); }
+  .currency-opt .symbol { font-size: 22px; font-weight: 700; color: #2C1810; }
+  .currency-opt .name { font-size: 11px; color: #8B6F6F; margin-top: 2px; }
+  .currency-opt .code { font-size: 12px; font-weight: 600; color: #6B2737; }
 
   /* WHATSAPP SETUP */
   .wa-status-box {
@@ -247,15 +247,15 @@ const styles = `
   }
   .sec-table { width: 100%; border-collapse: collapse; }
   .sec-table th {
-    font-size: 11px; font-weight: 700; color: #9ca3af;
+    font-size: 11px; font-weight: 700; color: #8B6F6F;
     text-transform: uppercase; letter-spacing: 0.5px;
-    padding: 8px 12px; border-bottom: 2px solid #f0f2f9; text-align: left;
+    padding: 8px 12px; border-bottom: 2px solid #e8ddd0; text-align: left;
   }
   .sec-table td {
-    padding: 12px; font-size: 13px; color: #1a1d2e;
-    border-bottom: 1px solid #f8f9fc; vertical-align: middle;
+    padding: 12px; font-size: 13px; color: #2C1810;
+    border-bottom: 1px solid #f5ede0; vertical-align: middle;
   }
-  .sec-table tr.admin-row td:first-child { border-left: 3px solid #d97706; padding-left: 9px; }
+  .sec-table tr.admin-row td:first-child { border-left: 3px solid #D4A853; padding-left: 9px; }
   .sec-table tr:last-child td { border-bottom: none; }
   .restore-overlay {
     position: fixed; top: 0; left: 0; right: 0; bottom: 0;
@@ -267,8 +267,8 @@ const styles = `
     width: 100%; max-width: 480px;
     box-shadow: 0 20px 60px rgba(0,0,0,0.15);
   }
-  .restore-modal h2 { font-size: 17px; font-weight: 700; color: #1a1d2e; margin: 0 0 6px 0; }
-  .restore-modal p { font-size: 13px; color: #6b7280; margin: 0 0 20px 0; }
+  .restore-modal h2 { font-size: 17px; font-weight: 700; color: #2C1810; margin: 0 0 6px 0; }
+  .restore-modal p { font-size: 13px; color: #8B6F6F; margin: 0 0 20px 0; }
   .restore-warn {
     background: #fef2f2; border: 1.5px solid #fecaca; border-radius: 10px;
     padding: 12px 16px; font-size: 13px; color: #dc2626;
@@ -326,9 +326,9 @@ const PLANS = {
 };
 
 const S = {
-  label: { fontSize: 12, fontWeight: 700, color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.5px', display: 'block', marginBottom: 6 },
-  input: { width: '100%', padding: '10px 14px', border: '1.5px solid #e5e7eb', borderRadius: 10, fontSize: 14, color: '#1a1d2e', background: '#fff', outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' },
-  select: { width: '100%', padding: '10px 14px', border: '1.5px solid #e5e7eb', borderRadius: 10, fontSize: 14, color: '#1a1d2e', background: '#fff', outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' },
+  label: { fontSize: 12, fontWeight: 700, color: '#8B6F6F', textTransform: 'uppercase', letterSpacing: '0.5px', display: 'block', marginBottom: 6 },
+  input: { width: '100%', padding: '10px 14px', border: '1.5px solid #e8ddd0', borderRadius: 10, fontSize: 14, color: '#2C1810', background: '#fff', outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' },
+  select: { width: '100%', padding: '10px 14px', border: '1.5px solid #e8ddd0', borderRadius: 10, fontSize: 14, color: '#2C1810', background: '#fff', outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' },
 };
 
 
@@ -657,7 +657,7 @@ export default function Settings() {
             Paramètres
           </h1>
           {saved && (
-            <span style={{ fontSize: 13, color: '#10b981', fontWeight: 600, display: 'flex', alignItems: 'center', gap: 6 }}>
+            <span style={{ fontSize: 13, color: '#22c55e', fontWeight: 600, display: 'flex', alignItems: 'center', gap: 6 }}>
               ✅ Modifications enregistrées
             </span>
           )}
@@ -737,11 +737,11 @@ export default function Settings() {
                 </span>
               </div>
               <div className="card-body">
-                <div style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '12px 16px', background: '#eef2ff', borderRadius: 10, border: '1.5px solid #6366f1', width: 'fit-content' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '12px 16px', background: 'rgba(212,168,83,0.08)', borderRadius: 10, border: '1.5px solid #D4A853', width: 'fit-content' }}>
                   <div style={{ fontSize: 28 }}>{MAD_CURRENCY.flag}</div>
                   <div>
-                    <div style={{ fontSize: 15, fontWeight: 700, color: '#6366f1' }}>{MAD_CURRENCY.code} — {MAD_CURRENCY.symbol}</div>
-                    <div style={{ fontSize: 12, color: '#6b7280', marginTop: 2 }}>{MAD_CURRENCY.name}</div>
+                    <div style={{ fontSize: 15, fontWeight: 700, color: '#6B2737' }}>{MAD_CURRENCY.code} — {MAD_CURRENCY.symbol}</div>
+                    <div style={{ fontSize: 12, color: '#8B6F6F', marginTop: 2 }}>{MAD_CURRENCY.name}</div>
                   </div>
                 </div>
               </div>
@@ -756,13 +756,13 @@ export default function Settings() {
             {/* Informations légales — croissance & elite only */}
             {profile?.plan_id !== 'essentiel' && (
               <div style={{ background: '#fff', border: '1px solid #e5e4e0', borderRadius: '10px', padding: '1.5rem', marginBottom: '1.5rem' }}>
-                <div style={{ fontWeight: '600', fontSize: '0.95rem', marginBottom: '1rem', color: '#1a1a18', display: 'flex', alignItems: 'center', gap: 8 }}>
+                <div style={{ fontWeight: '600', fontSize: '0.95rem', marginBottom: '1rem', color: '#2C1810', display: 'flex', alignItems: 'center', gap: 8 }}>
                   🏛 Informations légales
-                  <span style={{ fontSize: 11, background: '#f0fdf4', color: '#166534', padding: '2px 8px', borderRadius: 20, fontWeight: 500 }}>
+                  <span style={{ fontSize: 11, background: 'rgba(212,168,83,0.1)', color: '#6B2737', padding: '2px 8px', borderRadius: 20, fontWeight: 500 }}>
                     {profile?.plan_id === 'elite' ? 'Plan Élite' : 'Plan Croissance'}
                   </span>
                 </div>
-                <p style={{ fontSize: '0.82rem', color: '#6b6b66', marginBottom: '1rem' }}>
+                <p style={{ fontSize: '0.82rem', color: '#8B6F6F', marginBottom: '1rem' }}>
                   Ces informations apparaissent sur vos factures et devis conformément à la législation marocaine.
                 </p>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
@@ -817,7 +817,7 @@ export default function Settings() {
 
                 <div style={{ marginTop: '1.25rem' }}>
                   <button
-                    style={{ background: '#2d6a4f', color: '#fff', border: 'none', borderRadius: 6, padding: '10px 20px', cursor: 'pointer', fontSize: '0.9rem', fontWeight: 600 }}
+                    style={{ background: '#6B2737', color: '#fff', border: 'none', borderRadius: 6, padding: '10px 20px', cursor: 'pointer', fontSize: '0.9rem', fontWeight: 600 }}
                     onClick={saveLegalInfo}
                     disabled={savingLegal}>
                     {savingLegal ? 'Enregistrement...' : '✓ Enregistrer les informations légales'}
@@ -990,10 +990,10 @@ export default function Settings() {
                     { icon: '💬', title: 'Étape 3 — Message envoyé', desc: 'WhatsApp / SMS / Email envoyé automatiquement au client' },
                     { icon: '✅', title: 'Étape 4 — Suivi', desc: 'Statut de paiement mis à jour quand le client paie' },
                   ].map(s => (
-                    <div key={s.title} style={{ padding: '14px', background: '#f8f9fc', borderRadius: 10, border: '1px solid #eef0f7' }}>
+                    <div key={s.title} style={{ padding: '14px', background: '#FAF7F2', borderRadius: 10, border: '1px solid #e8ddd0' }}>
                       <div style={{ fontSize: 28, marginBottom: 8 }}>{s.icon}</div>
-                      <div style={{ fontSize: 13, fontWeight: 700, color: '#1a1d2e', marginBottom: 4 }}>{s.title}</div>
-                      <div style={{ fontSize: 12, color: '#6b7280' }}>{s.desc}</div>
+                      <div style={{ fontSize: 13, fontWeight: 700, color: '#2C1810', marginBottom: 4 }}>{s.title}</div>
+                      <div style={{ fontSize: 12, color: '#8B6F6F' }}>{s.desc}</div>
                     </div>
                   ))}
                 </div>
@@ -1014,10 +1014,10 @@ export default function Settings() {
             <div className={`wa-status-box ${wa.waha_url ? 'connected' : 'disconnected'}`}>
               <div className={`wa-dot ${wa.waha_url ? 'green' : 'yellow'}`} />
               <div>
-                <div style={{ fontSize: 14, fontWeight: 600, color: '#1a1d2e' }}>
+                <div style={{ fontSize: 14, fontWeight: 600, color: '#2C1810' }}>
                   {wa.waha_url ? '✅ URL Waha configurée' : '⚠️ WhatsApp non configuré'}
                 </div>
-                <div style={{ fontSize: 12, color: '#6b7280', marginTop: 2 }}>
+                <div style={{ fontSize: 12, color: '#8B6F6F', marginTop: 2 }}>
                   {wa.waha_url ? `Connecté à : ${wa.waha_url}` : 'Ajoutez l\'URL de votre serveur Waha ci-dessous pour activer les messages WhatsApp automatiques'}
                 </div>
               </div>
@@ -1031,7 +1031,7 @@ export default function Settings() {
                   <p>Waha est une API HTTP WhatsApp auto-hébergée — gratuite et facile à configurer</p>
                 </div>
                 <a href="https://waha.devlike.pro" target="_blank" rel="noreferrer"
-                  style={{ fontSize: 12, color: '#6366f1', fontWeight: 600 }}>
+                  style={{ fontSize: 12, color: '#D4A853', fontWeight: 600 }}>
                   Waha docs ↗
                 </a>
               </div>
@@ -1080,14 +1080,14 @@ export default function Settings() {
                   { step: '4', title: 'Créer un workflow n8n', desc: 'Importez le JSON du workflow n8n (disponible dès que vous êtes prêt) — il lit vos règles de rappel depuis Supabase et envoie les messages via Waha', code: false },
                 ].map(s => (
                   <div key={s.step} style={{ display: 'flex', gap: 16, marginBottom: 18, alignItems: 'flex-start' }}>
-                    <div style={{ width: 32, height: 32, borderRadius: '50%', background: '#6366f1', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 14, flexShrink: 0 }}>
+                    <div style={{ width: 32, height: 32, borderRadius: '50%', background: '#6B2737', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 14, flexShrink: 0 }}>
                       {s.step}
                     </div>
                     <div>
-                      <div style={{ fontSize: 14, fontWeight: 600, color: '#1a1d2e', marginBottom: 4 }}>{s.title}</div>
+                      <div style={{ fontSize: 14, fontWeight: 600, color: '#2C1810', marginBottom: 4 }}>{s.title}</div>
                       {s.code
                         ? <code style={{ background: '#1e1e2e', color: '#a6e3a1', padding: '8px 12px', borderRadius: 8, fontSize: 12, display: 'block', fontFamily: 'monospace' }}>{s.desc}</code>
-                        : <div style={{ fontSize: 13, color: '#6b7280' }}>{s.desc}</div>
+                        : <div style={{ fontSize: 13, color: '#8B6F6F' }}>{s.desc}</div>
                       }
                     </div>
                   </div>
@@ -1153,7 +1153,7 @@ export default function Settings() {
                             {u.name}
                             {u.role === 'admin' && <span style={{ marginLeft: 6, fontSize: 11, color: '#d97706' }}>⭐</span>}
                           </td>
-                          <td style={{ color: '#6b7280', fontSize: 12 }}>{u.email}</td>
+                          <td style={{ color: '#8B6F6F', fontSize: 12 }}>{u.email}</td>
                           <td>
                             <span className={`badge ${
                               u.role === 'admin'   ? 'badge-orange' :
@@ -1184,8 +1184,8 @@ export default function Settings() {
                 </div>
               </div>
               <div className="card-body">
-                <div style={{ padding: '14px 16px', background: '#fafbff', borderRadius: 10, border: '1px solid #e0e7ff', marginBottom: 20 }}>
-                  <div style={{ fontSize: 13, color: '#4338ca', lineHeight: 1.6 }}>
+                <div style={{ padding: '14px 16px', background: 'rgba(212,168,83,0.05)', borderRadius: 10, border: '1px solid rgba(212,168,83,0.3)', marginBottom: 20 }}>
+                  <div style={{ fontSize: 13, color: '#6B2737', lineHeight: 1.6 }}>
                     ℹ️ La restauration est gérée manuellement par notre équipe. Vous recevrez une confirmation par email avant toute action.
                   </div>
                 </div>
@@ -1223,24 +1223,24 @@ export default function Settings() {
           return (
             <>
               {/* Current Plan Card */}
-              <div style={{ background: '#fff', border: '2px solid #10b981', borderRadius: 14, padding: 24, marginBottom: 24, boxShadow: '0 1px 4px rgba(0,0,0,0.06)' }}>
+              <div style={{ background: '#fff', border: '2px solid #D4A853', borderRadius: 14, padding: 24, marginBottom: 24, boxShadow: '0 1px 4px rgba(0,0,0,0.06)' }}>
                 <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16 }}>
                   <div>
-                    <div style={{ fontSize: 11, fontWeight: 700, color: '#10b981', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 6 }}>
+                    <div style={{ fontSize: 11, fontWeight: 700, color: '#22c55e', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 6 }}>
                       ✅ Votre plan actuel
                     </div>
-                    <div style={{ fontSize: 22, fontWeight: 700, color: '#1a1d2e', marginBottom: 4 }}>
+                    <div style={{ fontSize: 22, fontWeight: 700, color: '#2C1810', marginBottom: 4 }}>
                       {currentPlanData.label}
                     </div>
-                    <div style={{ fontSize: 13, color: '#6b7280' }}>{currentPlanData.tagline}</div>
+                    <div style={{ fontSize: 13, color: '#8B6F6F' }}>{currentPlanData.tagline}</div>
                   </div>
                   <div style={{ textAlign: 'right' }}>
                     <div style={{ fontSize: 13, color: '#9ca3af', textDecoration: 'line-through', marginBottom: 4 }}>
                       {currentPlanData.fullPrice} MAD/mois
                     </div>
-                    <div style={{ fontSize: 22, fontWeight: 700, color: '#16a34a' }}>
+                    <div style={{ fontSize: 22, fontWeight: 700, color: '#6B2737' }}>
                       {currentPlanData.launchPrice} MAD
-                      <span style={{ fontSize: 13, fontWeight: 400, color: '#6b7280' }}>/mois</span>
+                      <span style={{ fontSize: 13, fontWeight: 400, color: '#8B6F6F' }}>/mois</span>
                     </div>
                     <div style={{ fontSize: 11, color: '#ea580c', fontWeight: 600, marginTop: 4 }}>
                       Prix de lancement · Offre limitée
@@ -1265,7 +1265,7 @@ export default function Settings() {
                 </div>
               ) : (
                 <>
-                  <div style={{ fontSize: 14, fontWeight: 700, color: '#1a1d2e', marginBottom: 16 }}>
+                  <div style={{ fontSize: 14, fontWeight: 700, color: '#2C1810', marginBottom: 16 }}>
                     ⬆️ Mettre à niveau votre plan
                   </div>
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16 }}>
@@ -1281,12 +1281,12 @@ export default function Settings() {
                           <div style={{ fontSize: 11, fontWeight: 700, color: plan.color, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>
                             {plan.tagline}
                           </div>
-                          <div style={{ fontSize: 18, fontWeight: 700, color: '#1a1d2e', marginBottom: 14 }}>
+                          <div style={{ fontSize: 18, fontWeight: 700, color: '#2C1810', marginBottom: 14 }}>
                             {plan.label}
                           </div>
                           <ul style={{ listStyle: 'none', margin: '0 0 20px', padding: 0 }}>
                             {plan.features.map(f => (
-                              <li key={f} style={{ fontSize: 13, color: '#374151', padding: '4px 0', display: 'flex', alignItems: 'center', gap: 8 }}>
+                              <li key={f} style={{ fontSize: 13, color: '#2C1810', padding: '4px 0', display: 'flex', alignItems: 'center', gap: 8 }}>
                                 <span style={{ color: plan.color, fontWeight: 700 }}>✓</span> {f}
                               </li>
                             ))}
@@ -1295,9 +1295,9 @@ export default function Settings() {
                             <span style={{ fontSize: 13, color: '#9ca3af', textDecoration: 'line-through', marginRight: 8 }}>
                               {plan.fullPrice} MAD/mois
                             </span>
-                            <div style={{ fontSize: 22, fontWeight: 700, color: '#16a34a', margin: '6px 0 4px' }}>
+                            <div style={{ fontSize: 22, fontWeight: 700, color: '#6B2737', margin: '6px 0 4px' }}>
                               {plan.launchPrice} MAD
-                              <span style={{ fontSize: 13, fontWeight: 400, color: '#6b7280' }}>/mois</span>
+                              <span style={{ fontSize: 13, fontWeight: 400, color: '#8B6F6F' }}>/mois</span>
                             </div>
                             <span style={{ background: '#fff7ed', color: '#ea580c', border: '1px solid #fed7aa', borderRadius: 20, padding: '2px 10px', fontSize: 11, fontWeight: 700 }}>
                               🏷️ Offre de lancement -100 MAD
@@ -1441,18 +1441,18 @@ export default function Settings() {
             onClick={() => !upgradeLoading && setUpgradeModal({ open: false, plan: null })}>
             <div style={{ background: '#fff', borderRadius: 16, padding: 28, width: '100%', maxWidth: 480, boxShadow: '0 20px 60px rgba(0,0,0,0.15)' }}
               onClick={e => e.stopPropagation()}>
-              <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1a1d2e', margin: '0 0 4px' }}>
+              <h2 style={{ fontSize: 18, fontWeight: 700, color: '#2C1810', margin: '0 0 4px' }}>
                 Passer au {plan?.label} ?
               </h2>
               <div style={{ fontSize: 26, fontWeight: 800, color: plan?.color, margin: '10px 0 14px' }}>
-                {plan?.launchPrice} MAD<span style={{ fontSize: 13, fontWeight: 400, color: '#6b7280' }}>/mois</span>
+                {plan?.launchPrice} MAD<span style={{ fontSize: 13, fontWeight: 400, color: '#8B6F6F' }}>/mois</span>
               </div>
-              <div style={{ fontSize: 13, fontWeight: 700, color: '#374151', marginBottom: 8 }}>
+              <div style={{ fontSize: 13, fontWeight: 700, color: '#2C1810', marginBottom: 8 }}>
                 Fonctionnalités débloquées :
               </div>
               <ul style={{ listStyle: 'none', margin: '0 0 18px', padding: 0 }}>
                 {plan?.features.map(f => (
-                  <li key={f} style={{ fontSize: 13, color: '#374151', padding: '3px 0', display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <li key={f} style={{ fontSize: 13, color: '#2C1810', padding: '3px 0', display: 'flex', alignItems: 'center', gap: 8 }}>
                     <span style={{ color: plan.color, fontWeight: 700 }}>✓</span> {f}
                   </li>
                 ))}
@@ -1464,13 +1464,13 @@ export default function Settings() {
                 <button
                   onClick={() => setUpgradeModal({ open: false, plan: null })}
                   disabled={upgradeLoading}
-                  style={{ background: '#f3f4f6', color: '#374151', border: 'none', borderRadius: 8, padding: '10px 20px', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>
+                  style={{ background: '#FAF7F2', color: '#8B6F6F', border: 'none', borderRadius: 8, padding: '10px 20px', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>
                   Annuler
                 </button>
                 <button
                   onClick={handleUpgrade}
                   disabled={upgradeLoading}
-                  style={{ background: '#10b981', color: '#fff', border: 'none', borderRadius: 8, padding: '10px 22px', fontSize: 13, fontWeight: 600, cursor: upgradeLoading ? 'not-allowed' : 'pointer', opacity: upgradeLoading ? 0.75 : 1, display: 'flex', alignItems: 'center', gap: 8 }}>
+                  style={{ background: '#6B2737', color: '#fff', border: 'none', borderRadius: 8, padding: '10px 22px', fontSize: 13, fontWeight: 600, cursor: upgradeLoading ? 'not-allowed' : 'pointer', opacity: upgradeLoading ? 0.75 : 1, display: 'flex', alignItems: 'center', gap: 8 }}>
                   {upgradeLoading ? '⏳ En cours…' : '✅ Confirmer la mise à niveau'}
                 </button>
               </div>
@@ -1489,12 +1489,12 @@ export default function Settings() {
               ⚠️ Cette action écrasera toutes les données modifiées <strong>après</strong> la date choisie. L'opération est effectuée par notre équipe après validation.
             </div>
             <div style={{ marginBottom: 18 }}>
-              <label style={{ fontSize: 12, fontWeight: 700, color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.5px', display: 'block', marginBottom: 8 }}>
+              <label style={{ fontSize: 12, fontWeight: 700, color: '#8B6F6F', textTransform: 'uppercase', letterSpacing: '0.5px', display: 'block', marginBottom: 8 }}>
                 Date et heure cible *
               </label>
               <input
                 type="datetime-local"
-                style={{ width: '100%', padding: '10px 14px', border: '1.5px solid #e5e7eb', borderRadius: 10, fontSize: 14, color: '#1a1d2e', outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' }}
+                style={{ width: '100%', padding: '10px 14px', border: '1.5px solid #e8ddd0', borderRadius: 10, fontSize: 14, color: '#2C1810', outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' }}
                 value={restoreForm.target_datetime}
                 max={new Date().toISOString().slice(0, 16)}
                 onChange={e => setRestoreForm(f => ({ ...f, target_datetime: e.target.value }))}

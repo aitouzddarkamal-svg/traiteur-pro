@@ -3,27 +3,27 @@ import { supabase } from '../lib/supabaseClient';
 import { useNavigate, Link } from 'react-router-dom';
 
 const S = {
-  wrap:       { minHeight: '100vh', background: '#f9f8f5', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24, direction: 'ltr', textAlign: 'left' },
-  card:       { background: '#fff', borderRadius: 16, padding: 40, width: '100%', maxWidth: 560, boxShadow: '0 4px 24px rgba(0,0,0,0.08)', direction: 'ltr', textAlign: 'left' },
+  wrap:       { minHeight: '100vh', background: '#FAF7F2', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24, direction: 'ltr', textAlign: 'left' },
+  card:       { background: '#fff', borderRadius: 16, padding: 40, width: '100%', maxWidth: 560, boxShadow: '0 4px 24px rgba(107,39,55,0.08)', direction: 'ltr', textAlign: 'left' },
   logo:       { display: 'flex', alignItems: 'center', gap: 8, marginBottom: 28 },
-  logoDot:    { width: 10, height: 10, borderRadius: '50%', background: '#2d6a4f' },
-  logoText:   { fontSize: 18, fontWeight: 700, color: '#1a1a18' },
-  title:      { fontSize: 22, fontWeight: 700, color: '#1a1a18', marginBottom: 4 },
-  subtitle:   { fontSize: 14, color: '#888', marginBottom: 28 },
+  logoDot:    { width: 10, height: 10, borderRadius: '50%', background: '#D4A853' },
+  logoText:   { fontSize: 18, fontWeight: 700, color: '#2C1810' },
+  title:      { fontSize: 22, fontWeight: 700, color: '#2C1810', marginBottom: 4 },
+  subtitle:   { fontSize: 14, color: '#8B6F6F', marginBottom: 28 },
   formRow:    { marginBottom: 16 },
-  label:      { fontSize: 12, color: '#555', marginBottom: 4, display: 'block', fontWeight: 500 },
-  input:      { width: '100%', padding: '10px 14px', borderRadius: 8, border: '1px solid #ddd', fontSize: 14, outline: 'none', boxSizing: 'border-box', background: '#fff' },
-  inputErr:   { borderColor: '#c0392b' },
-  errSpan:    { color: '#c0392b', fontSize: 11, marginTop: 3, display: 'block' },
+  label:      { fontSize: 12, color: '#8B6F6F', marginBottom: 4, display: 'block', fontWeight: 500 },
+  input:      { width: '100%', padding: '10px 14px', borderRadius: 8, border: '1px solid #e8ddd0', fontSize: 14, outline: 'none', boxSizing: 'border-box', background: '#fff' },
+  inputErr:   { borderColor: '#ef4444' },
+  errSpan:    { color: '#ef4444', fontSize: 11, marginTop: 3, display: 'block' },
   row2:       { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 },
   pwWrap:     { position: 'relative' },
-  pwToggle:   { position: 'absolute', right: 12, top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', fontSize: 16, color: '#888', padding: 0 },
-  btnPrimary: { background: '#2d6a4f', color: '#fff', border: 'none', borderRadius: 8, padding: '12px 24px', fontSize: 14, fontWeight: 600, cursor: 'pointer', width: '100%', marginTop: 8 },
-  successBox: { background: '#f0fdf4', border: '1px solid #c3e6d4', borderRadius: 8, padding: '12px 16px', fontSize: 14, color: '#166534', marginBottom: 16 },
+  pwToggle:   { position: 'absolute', right: 12, top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', fontSize: 16, color: '#8B6F6F', padding: 0 },
+  btnPrimary: { background: '#6B2737', color: '#FAF7F2', border: 'none', borderRadius: 8, padding: '12px 24px', fontSize: 14, fontWeight: 600, cursor: 'pointer', width: '100%', marginTop: 8 },
+  successBox: { background: 'rgba(34,197,94,0.08)', border: '1px solid rgba(34,197,94,0.3)', borderRadius: 8, padding: '12px 16px', fontSize: 14, color: '#166534', marginBottom: 16 },
   errorBox:   { background: '#fef2f2', border: '1px solid #fecaca', borderRadius: 8, padding: '12px 16px', fontSize: 14, color: '#dc2626', marginBottom: 16 },
-  foot:       { marginTop: 20, textAlign: 'center', fontSize: 13, color: '#888' },
-  link:       { color: '#2d6a4f', textDecoration: 'none', fontWeight: 600 },
-  badge:      { background: '#f0fdf4', border: '1px solid #c3e6d4', borderRadius: 8, padding: '8px 14px', fontSize: 12, color: '#166534', textAlign: 'center', marginBottom: 20 },
+  foot:       { marginTop: 20, textAlign: 'center', fontSize: 13, color: '#8B6F6F' },
+  link:       { color: '#D4A853', textDecoration: 'none', fontWeight: 600 },
+  badge:      { background: 'rgba(212,168,83,0.08)', border: '1px solid rgba(212,168,83,0.3)', borderRadius: 8, padding: '8px 14px', fontSize: 12, color: '#6B2737', textAlign: 'center', marginBottom: 20 },
 };
 
 const emptyForm = {
@@ -261,7 +261,7 @@ export default function Register() {
         </button>
 
         <div style={S.foot}>
-          <div style={{ marginBottom: 6, fontSize: 12, color: '#aaa' }}>
+          <div style={{ marginBottom: 6, fontSize: 12, color: '#8B6F6F' }}>
             Essai gratuit 30 jours · Sans carte bancaire
           </div>
           Déjà un compte ?{' '}

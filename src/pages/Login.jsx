@@ -22,23 +22,23 @@ export default function Login() {
   }
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#f8f7f4', direction: 'ltr', textAlign: 'left' }}>
-      <div style={{ background: '#fff', borderRadius: '14px', padding: '2.5rem', width: '100%', maxWidth: '400px', boxShadow: '0 4px 24px rgba(0,0,0,0.08)', direction: 'ltr', textAlign: 'left' }}>
+    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FAF7F2', direction: 'ltr', textAlign: 'left' }}>
+      <div style={{ background: '#fff', borderRadius: '14px', padding: '2.5rem', width: '100%', maxWidth: '400px', boxShadow: '0 4px 24px rgba(107,39,55,0.08)', direction: 'ltr', textAlign: 'left' }}>
 
         {/* Logo + Titre */}
         <div style={{ marginBottom: '2rem', textAlign: 'center' }}>
-          <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: '#1a5c3a', margin: '0 auto 1rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <span style={{ color: '#fff', fontSize: '22px', fontWeight: '600' }}>T</span>
+          <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: '#6B2737', margin: '0 auto 1rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <span style={{ color: '#FAF7F2', fontSize: '22px', fontWeight: '600' }}>T</span>
           </div>
-          <h1 style={{ fontSize: '22px', fontWeight: '600', color: '#1a1a18', marginBottom: '4px' }}>Traiteur Pro</h1>
-          <p style={{ fontSize: '14px', color: '#6b6b66' }}>Connectez-vous à votre espace</p>
+          <h1 style={{ fontSize: '22px', fontWeight: '600', color: '#2C1810', marginBottom: '4px' }}>Traiteur Pro</h1>
+          <p style={{ fontSize: '14px', color: '#8B6F6F' }}>Connectez-vous à votre espace</p>
         </div>
 
         {/* Bannière essai 30 jours */}
-        <div style={{ background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: '8px', padding: '10px 14px', marginBottom: '1.5rem', textAlign: 'center', direction: 'ltr', unicodeBidi: 'embed' }}>
+        <div style={{ background: 'rgba(212,168,83,0.08)', border: '1px solid rgba(212,168,83,0.3)', borderRadius: '8px', padding: '10px 14px', marginBottom: '1.5rem', textAlign: 'center', direction: 'ltr', unicodeBidi: 'embed' }}>
           <span style={{
             fontSize: '13px',
-            color: '#166534',
+            color: '#6B2737',
             fontWeight: '600',
             direction: 'ltr',
             unicodeBidi: 'embed',
@@ -58,38 +58,38 @@ export default function Login() {
         {/* Formulaire */}
         <form onSubmit={handleSubmit}>
           <div style={{ marginBottom: '1rem' }}>
-            <label style={{ display: 'block', fontSize: '13px', fontWeight: '500', marginBottom: '6px', color: '#1a1a18' }}>Email</label>
+            <label style={{ display: 'block', fontSize: '13px', fontWeight: '500', marginBottom: '6px', color: '#2C1810' }}>Email</label>
             <input
               type="email"
               value={email}
               onChange={e => setEmail(e.target.value)}
               placeholder="admin@traiteur-pro.com"
               required
-              style={{ width: '100%', padding: '10px 12px', border: '1px solid #e5e3dc', borderRadius: '8px', fontSize: '14px', background: '#f8f7f4', boxSizing: 'border-box' }}
+              style={{ width: '100%', padding: '10px 12px', border: '1px solid #e8ddd0', borderRadius: '8px', fontSize: '14px', background: '#FAF7F2', boxSizing: 'border-box' }}
             />
           </div>
           <div style={{ marginBottom: '1.5rem' }}>
-            <label style={{ display: 'block', fontSize: '13px', fontWeight: '500', marginBottom: '6px', color: '#1a1a18' }}>Mot de passe</label>
+            <label style={{ display: 'block', fontSize: '13px', fontWeight: '500', marginBottom: '6px', color: '#2C1810' }}>Mot de passe</label>
             <input
               type="password"
               value={password}
               onChange={e => setPassword(e.target.value)}
               placeholder="••••••••"
               required
-              style={{ width: '100%', padding: '10px 12px', border: '1px solid #e5e3dc', borderRadius: '8px', fontSize: '14px', background: '#f8f7f4', boxSizing: 'border-box' }}
+              style={{ width: '100%', padding: '10px 12px', border: '1px solid #e8ddd0', borderRadius: '8px', fontSize: '14px', background: '#FAF7F2', boxSizing: 'border-box' }}
             />
           </div>
           <button
             type="submit"
             disabled={loading}
-            style={{ width: '100%', padding: '11px', background: loading ? '#6b9e85' : '#1a5c3a', color: '#fff', borderRadius: '8px', fontSize: '15px', fontWeight: '500', cursor: loading ? 'not-allowed' : 'pointer', border: 'none' }}
+            style={{ width: '100%', padding: '11px', background: loading ? '#a08040' : '#6B2737', color: '#FAF7F2', borderRadius: '8px', fontSize: '15px', fontWeight: '500', cursor: loading ? 'not-allowed' : 'pointer', border: 'none' }}
           >
             {loading ? 'Connexion...' : 'Se connecter'}
           </button>
         </form>
 
         {/* Footer */}
-        <p style={{ textAlign: 'center', fontSize: '12px', color: '#9b9b94', marginTop: '1.5rem' }}>
+        <p style={{ textAlign: 'center', fontSize: '12px', color: '#8B6F6F', marginTop: '1.5rem' }}>
           Traiteur Marocain © 2026
         </p>
       </div>
